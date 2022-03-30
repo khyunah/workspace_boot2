@@ -9,9 +9,9 @@ public class Student extends Object {
 
 	public static void main(String[] args) {
 
-		// java.lang.* 패키지
-		// 자동으로 import해주는 패키지 입니다.
-		// 기본적으로 많이 사용하는 기본 클래스들의 묶음 ( String, System )
+//		 java.lang.* 패키지
+//		 자동으로 import해주는 패키지 입니다.
+//		 기본적으로 많이 사용하는 기본 클래스들의 묶음 ( String, System )
 
 		// 게이트 웨이 (Object타입으로 구현 가능)
 	}
