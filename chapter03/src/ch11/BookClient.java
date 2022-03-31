@@ -9,4 +9,5 @@ public class BookClient {
 		serialBookNumber++;
 		return new Book(serialBookNumber, title, author);
 	}
+
 }
