@@ -17,5 +17,4 @@ public interface BookService {
 
 	// ArrayList에 저장되어 있는 책 정보를 전부 출력하는 기능
 	void showAllBook();
-
 }

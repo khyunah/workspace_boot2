@@ -1,5 +1,5 @@
 package ch11;
-// 삭제하고 나서 중간에 null 없이 앞으로 땡겨주기 수정해야함
+
 import java.util.Scanner;
 
 public class BookArrayMainTest {
@@ -44,22 +44,23 @@ public class BookArrayMainTest {
 						Book updatebook = new Book(0, title, author);
 						bookArray.updateBook(savedTitle, updatebook);
 						updateCheck = true;
-						if(updateCheck == true) break;
+						if (updateCheck == true)
+							break;
 					}
 				}
 			} else if (menuChoice.equals("3")) {
 				System.out.println("조회할 도서명을 입력해주세요.");
 				title = scanner.nextLine();
 				bookArray.selectedByTitleBook(title);
-			} else if(menuChoice.equals("4")) {
+			} else if (menuChoice.equals("4")) {
 				System.out.println("등록된 도서 목록을 전체 조회합니다.");
 				bookArray.showAllBook();
-			} else if(menuChoice.equals("5")) {
+			} else if (menuChoice.equals("5")) {
 				System.out.println("삭제할 도서명을 입력해주세요.");
 				title = scanner.nextLine();
 				bookArray.deleteBook(title);
 			}
 		} while (exit);
+		scanner.close();
 	}
-
 }

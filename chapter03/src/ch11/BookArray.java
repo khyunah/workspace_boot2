@@ -41,6 +41,7 @@ public class BookArray implements BookService {
 
 	/**
 	 * 책의 제목을 입력받아 for문으로 검사를 해서, 책이 있다면 삭제.
+	 * 삭제한 책으로 인해 배열 중간에 빈 공간 null을 채우기위해 앞으로 당겨준다.
 	 */
 	@Override
 	public void deleteBook(String title) {
@@ -54,10 +55,20 @@ public class BookArray implements BookService {
 				}
 			}
 		}
-		for (int i = index; i < books.length; i++) {
-			books[i] = books[i + 1];
+		if (index == -1) {
+			System.out.println("입력하신 제목의 책이 존재 하지 않아 삭제할 수 없습니다.");
 		}
-		System.out.println("입력하신 제목의 책이 존재 하지 않아 삭제할 수 없습니다.");
+
+		for (int i = index; i < books.length; i++) {
+			if (books[i + 1] == null)
+				return;
+			if (books[i + 1] != null) {
+				books[i] = books[i + 1];
+				if (books[i + 2] == null) {
+					books[i + 1] = null;
+				}
+			}
+		}
 	}
 
 	/**
