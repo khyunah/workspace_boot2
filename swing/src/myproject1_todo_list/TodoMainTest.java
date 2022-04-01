@@ -3,16 +3,12 @@ package myproject1_todo_list;
 import java.util.Scanner;
 
 public class TodoMainTest {
-	
-	
 
 	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner(System.in);
 		TodoClient client = new TodoClient();
 		TodoMySql mySql = new TodoMySql();
-		
-		 
 
 		String userInputTodo = "";
 		String userInputTodoTime = "";
@@ -25,7 +21,6 @@ public class TodoMainTest {
 		final String DELETE = "5";
 		final String CLOSE = "0";
 		boolean exit = true;
-
 		
 		do {
 			System.out.println("                          [ 메뉴 선택 ]                            \n");
@@ -108,7 +103,7 @@ public class TodoMainTest {
 			 */
 			else if (menuChoice.equals(CHECK)) {
 				mySql.readAllTodo();
-				System.out.println("                          [ 체크 하기 ]                            \n");
+				System.out.println("                         [ 체크 하기 ]                            \n");
 				System.out.println("TO DO NUM : ");
 				int inputTodoNum = scanner.nextInt();
 				scanner.nextLine();
