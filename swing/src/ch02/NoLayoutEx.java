@@ -1,7 +1,5 @@
 package ch02;
 
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
