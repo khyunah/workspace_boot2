@@ -8,5 +8,4 @@ public class MyLogger {
 		Logger logger = Logger.getLogger("MyCustomLog");
 		logger.warning(str);
 	}
-
 }

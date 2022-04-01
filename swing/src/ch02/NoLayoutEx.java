@@ -1,10 +1,12 @@
 package ch02;
 
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class NoLayoutEx extends JFrame {
-
+	
 	private JButton button1;
 	private JButton button2;
 	private JButton button3;

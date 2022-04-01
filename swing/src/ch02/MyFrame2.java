@@ -1,5 +1,6 @@
 package ch02;
 
+// ArrayList 사용시 처음 사이즈 설정되어 있지 않기 때문에  for문 사용시 주의 !!!!!!!!!!!!!!
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
@@ -7,14 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class MyFrame2 extends JFrame {
-
-//	private BorderLayout borderLayout;
-//	private JButton[] buttons = new JButton[5];
-//	private String[] titles = { "북", "센터", "남", "동", "서" };
-//	private String[] directions = { 
-//			BorderLayout.NORTH, BorderLayout.CENTER, 
-//			BorderLayout.SOUTH, BorderLayout.EAST,
-//			BorderLayout.WEST };
 
 	private BorderLayout borderLayout;
 	private ArrayList<JButton> buttons = new ArrayList<JButton>();
@@ -39,7 +32,7 @@ public class MyFrame2 extends JFrame {
 		directions.add(BorderLayout.EAST);
 		directions.add(BorderLayout.WEST);
 
-		for (int i = 0; i < buttons.size(); i++) {
+		for (int i = 0; i < titles.size(); i++) {
 			buttons.add(new JButton(titles.get(i)));
 		}
 	}
@@ -59,7 +52,7 @@ public class MyFrame2 extends JFrame {
 			this.add(buttons.get(i), directions.get(i));
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new MyFrame2();
 	}

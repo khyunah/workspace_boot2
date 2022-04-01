@@ -2,7 +2,7 @@ package ch01;
 
 import boot.logger.MyLogger;
 
-public class MainTest2 {
+public class LoggerJarMainTest {
 
 	public static void main(String[] args) {
 
