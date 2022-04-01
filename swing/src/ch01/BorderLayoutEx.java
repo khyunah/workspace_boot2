@@ -12,8 +12,8 @@ public class BorderLayoutEx extends JFrame {
 	private JButton button3;
 	private BorderLayout borderLayout;
 
-	// super 생략한 것
 	public BorderLayoutEx() {
+		// super 생략한 것
 		setTitle("테스트1");
 		setSize(500, 500);
 		setVisible(true);

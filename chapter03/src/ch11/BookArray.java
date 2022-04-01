@@ -57,6 +57,7 @@ public class BookArray implements BookService {
 		}
 		if (index == -1) {
 			System.out.println("입력하신 제목의 책이 존재 하지 않아 삭제할 수 없습니다.");
+			return;
 		}
 
 		for (int i = index; i < books.length; i++) {
