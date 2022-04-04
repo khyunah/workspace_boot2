@@ -58,6 +58,5 @@ public class EventListener2 extends JFrame implements ActionListener {
 		} else {
 			System.out.println(button2.getText() + "가 클릭되었습니다.");
 		}
-
 	}
 }

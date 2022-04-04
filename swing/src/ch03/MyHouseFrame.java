@@ -26,13 +26,12 @@ class MyPanel1 extends JPanel {
 		g.drawLine(695, 550, 660, 590);
 		g.drawLine(695, 550, 730, 590);
 
-//		for (int i = 0; i < 20; i++) {
-//			g.drawString("☆", 50*i, 40);
-//			g.drawString("☆", 20 * i, 50 * i);
-//			g.drawString("★", 45 * i, 50 * i);
-//			g.drawString("★", 45 * i, 50 * i);
-//
-//		}
+		for (int i = 0; i < 20; i++) {
+			g.drawString("☆", 50*i, 40);
+			g.drawString("☆", 50*i, 750);
+			g.drawString("★", 20, 50 * i);
+			g.drawString("★", 750, 50 * i);
+		}
 	}
 }
 

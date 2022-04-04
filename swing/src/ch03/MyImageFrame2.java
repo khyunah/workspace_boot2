@@ -15,8 +15,6 @@ public class MyImageFrame2 extends JFrame {
 	private BufferedImage bacgroundImage;
 	private BufferedImage imageIcon;
 	private MyImegePanel myImagePanel;
-	
-	private File image1 = new File("image1.jpg");
 
 	public MyImageFrame2() {
 		initData();
@@ -60,8 +58,4 @@ public class MyImageFrame2 extends JFrame {
 	public static void main(String[] args) {
 		new MyImageFrame2();
 	} // end of main
-	
-	public void addEventListener() {
-		System.out.println("브랜치를 만들었습니다.");
-	}
 } // end of outer class

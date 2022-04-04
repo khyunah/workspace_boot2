@@ -32,11 +32,9 @@ public class MyComponents extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 800);
 
-		panel = new JPanel();
-//		panel.setPreferredSize(getPreferredSize());
 		Dimension dimension = new Dimension(300, 300);
+		panel = new JPanel();
 		panel.setPreferredSize(dimension);
-		System.out.println(dimension.getSize());
 
 		button = new JButton("button");
 		label = new JLabel("label");
@@ -51,11 +49,15 @@ public class MyComponents extends JFrame {
 		// 왼쪽 오른쪽 센터 설정가능
 
 		add(panel);
-		panel.setBackground(Color.BLUE);
+		panel.setBackground(Color.MAGENTA);
 		panel.add(button);
 		panel.add(label);
 		panel.add(textField);
 		panel.add(passwordField);
 		panel.add(checkBox);
+	}
+
+	public static void main(String[] args) {
+		new MyComponents();
 	}
 }

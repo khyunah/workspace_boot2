@@ -13,8 +13,6 @@ import javax.swing.JPanel;
 // 메인에서 파일을 받아올 수 있도록 수정 해보기
 public class MyImageFrame2_1 extends JFrame {
 
-	// 코드를 수정해주세요
-	// 하드코딩을 상수나 스태틱 활용해서 처리해주세요
 	private BufferedImage bacgroundImage;
 	private BufferedImage imageIcon;
 	private MyImegePanel myImagePanel;
@@ -62,5 +60,4 @@ public class MyImageFrame2_1 extends JFrame {
 			g.drawImage(imageIcon, 0, 0, ICON_WIDTH, ICON_HEIGHT, null);
 		}
 	} // end of inner class
-
 } // end of outer class
