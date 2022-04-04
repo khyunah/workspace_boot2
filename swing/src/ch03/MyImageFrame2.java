@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -61,4 +60,8 @@ public class MyImageFrame2 extends JFrame {
 	public static void main(String[] args) {
 		new MyImageFrame2();
 	} // end of main
+	
+	public void addEventListener() {
+		System.out.println("브랜치를 만들었습니다.");
+	}
 } // end of outer class
