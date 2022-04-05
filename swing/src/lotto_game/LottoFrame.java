@@ -1,6 +1,5 @@
 package lotto_game;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -17,10 +16,12 @@ import javax.swing.JPanel;
 public class LottoFrame extends JFrame implements ActionListener {
 
 	Random random = new Random();
+	
 	private JButton startButton;
+	private JPanel panel;
+
 	private int[] lottoNumbers = new int[6];
 	private Color[] lottoColors = new Color[6];
-	private JPanel panel;
 
 	public LottoFrame() {
 		initData();
@@ -29,11 +30,14 @@ public class LottoFrame extends JFrame implements ActionListener {
 	}
 
 	private void initData() {
+		setTitle("로또 번호 생성기");
 		setSize(450, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		startButton = new JButton("로또 번호 확인");
-		startButton.setBackground(Color.WHITE);
 		panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 20, 20));
+
+		startButton.setBackground(Color.WHITE);
 		panel.setBackground(Color.WHITE);
 	}
 
@@ -62,13 +66,14 @@ public class LottoFrame extends JFrame implements ActionListener {
 		g.setFont(font);
 
 		if (lottoNumbers[0] == 0) {
-			g.drawString("로또버튼을 클릭하세요", 100, 180);
+			g.drawString("로또버튼을 클릭하세요", 130, 180);
 			return;
 		}
-		// lottoNumbers[0] 값이 있다면 6개 번호를 생성한 후 번호를 그려보자.
+
 		for (int i = 0; i < lottoNumbers.length; i++) {
 			g.drawString(lottoNumbers[i] + "", 60 * (i + 1), 180);
-			g.drawOval(61 * (i + 1) - 20, 150, 45, 45);
+			g.drawOval(62 * (i + 1) - 20, 150, 45, 45);
+			g.setColor(lottoColors[i]);
 		}
 	}
 
@@ -98,7 +103,6 @@ public class LottoFrame extends JFrame implements ActionListener {
 				}
 			}
 		}
-		// 정렬문제 해결
 		Arrays.sort(lotto);
 		return lotto;
 	}

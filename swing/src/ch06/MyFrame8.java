@@ -54,19 +54,19 @@ public class MyFrame8 extends JFrame {
 				super.keyPressed(e);
 				int keyCode = e.getKeyCode();
 				if (keyCode == KeyEvent.VK_LEFT) {
-					if (x > -35) {
+					if (x > -40) {
 						x -= 5;
 					}
 				} else if (keyCode == KeyEvent.VK_RIGHT) {
-					if (x < 350) {
+					if (x < 380) {
 						x += 5;
 					}
 				} else if (keyCode == KeyEvent.VK_UP) {
-					if (y > -25) {
+					if (y > -30) {
 						y -= 5;
 					}
 				} else if (keyCode == KeyEvent.VK_DOWN) {
-					if (y < 330) {
+					if (y < 340) {
 						y += 5;
 					}
 				}
