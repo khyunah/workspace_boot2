@@ -21,7 +21,7 @@ public class LottoFrame2 extends JFrame {
 	public LottoFrame2() {
 		initData();
 		setInitLayout();
-		addEventListemer();
+		addEventListener();
 	}
 
 	private void initData() {
@@ -40,7 +40,7 @@ public class LottoFrame2 extends JFrame {
 		add(lottoPanel, BorderLayout.CENTER);
 	}
 
-	private void addEventListemer() {
+	private void addEventListener() {
 		startBtn.addActionListener(new ActionListener() {
 
 			@Override
