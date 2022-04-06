@@ -21,6 +21,8 @@ public class AddressBook1 extends JFrame {
 
 	TextArea area;
 	JScrollPane jScrollPane;
+	
+//	Defaultlis
 
 	public AddressBook1() {
 		initData();
