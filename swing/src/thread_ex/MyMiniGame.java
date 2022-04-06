@@ -1,13 +1,19 @@
 package thread_ex;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -20,16 +26,20 @@ public class MyMiniGame extends JFrame {
 	CustomJPanel customJPanel;
 	Thread thread1;
 
+	JPanel btnPanel;
+
+	JButton stopBtn;
+	JButton startBtn;
+
 	File bagImage1_file = new File("image2.png");
 	File iconImage1_file = new File("icon3.png");
 	File iconImage2_file = new File("icon3.png");
 
-	
 	public MyMiniGame() {
 		initData();
 		setInitLayout();
 		addEvevtListener();
-		
+
 		// 생성자에서 thread.start()하기
 		thread1 = new Thread(customJPanel);
 		thread1.start();
@@ -47,14 +57,39 @@ public class MyMiniGame extends JFrame {
 			System.out.println("파일이 없습니다.");
 		}
 		customJPanel = new CustomJPanel();
+		btnPanel = new JPanel(new GridLayout(1, 2));
+		stopBtn = new JButton("stop");
+		startBtn = new JButton("start");
 	}
 
 	private void setInitLayout() {
 		setVisible(true);
 		add(customJPanel);
+		add(btnPanel, BorderLayout.SOUTH);
+		btnPanel.setSize(getWidth(), 100);
+		btnPanel.add(stopBtn);
+		stopBtn.setBackground(Color.RED);
+		btnPanel.add(startBtn);
+		startBtn.setBackground(Color.ORANGE);
 	}
 
 	private void addEvevtListener() {
+		
+		stopBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				customJPanel.gameStart = false;
+			}
+		});
+		
+		startBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				customJPanel.gameStart = true;
+			}
+		});
 
 		this.addKeyListener(new KeyAdapter() {
 
@@ -84,6 +119,7 @@ public class MyMiniGame extends JFrame {
 	}
 
 	private class CustomJPanel extends JPanel implements Runnable {
+		boolean gameStart = true;
 		private int icon1XPoint = 100;
 		private int icon1YPoint = 100;
 		private int icon2XPoint = 300;
@@ -122,31 +158,33 @@ public class MyMiniGame extends JFrame {
 				// max좌표값을 확인하고 x좌표값을 -
 				// 그림을 다시 그려주세요.
 				// thread.sleep 사용
-				
-				if(direction) {
-					icon2XPoint += 5;
-				} else {
-					icon2XPoint -= 5;
-				}
-				
-				if(icon2XPoint == 500) {
-					direction = false;
-				}
-				if(icon2XPoint == 100) {
-					direction = true;
+//				System.out.println("와일문");
+				if(gameStart) {
+					if (direction) {
+						icon2XPoint += 5;
+					} else {
+						icon2XPoint -= 5;
+					}
+					
+					if (icon2XPoint == 500) {
+						direction = false;
+					}
+					if (icon2XPoint == 100) {
+						direction = true;
+					}
+					try {
+						Thread.sleep(200);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 				repaint();
-				
-				try {
-					Thread.sleep(200);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		}
 	}
 
 	public static void main(String[] args) {
 		new MyMiniGame();
+
 	}
 }

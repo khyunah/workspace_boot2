@@ -5,7 +5,6 @@ import java.io.IOException;
 public class TerminateThread extends Thread {
 
 	private boolean flag = false;
-	int i;
 
 	public TerminateThread(String name) {
 		super(name);

@@ -51,7 +51,7 @@ public class ThreadTest2 {
 		MyCustomThread subThread2 = new MyCustomThread("서브 작업자2");
 		subThread2.start();
 
-		// 작업자2 만들기
+		// 작업자3 만들기
 		MyCustomThread subThread3 = new MyCustomThread("서브 작업자3");
 		subThread3.start();
 

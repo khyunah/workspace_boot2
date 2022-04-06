@@ -1,6 +1,6 @@
 package thread_ex;
 
-class PriorutuThread extends Thread {
+class PriorityThread extends Thread {
 
 	@Override
 	public void run() {
@@ -15,7 +15,6 @@ class PriorutuThread extends Thread {
 		}
 		System.out.println(t.getPriority() + "end");
 	}
-	
 }
 
 public class ThreadTest4 {
@@ -23,7 +22,7 @@ public class ThreadTest4 {
 	public static void main(String[] args) {
 		int i;
 		for(i = Thread.MIN_PRIORITY; i <= 10; i++) {
-			PriorutuThread pt = new PriorutuThread();
+			PriorityThread pt = new PriorityThread();
 			pt.setPriority(i);
 			pt.start();
 		}

@@ -20,11 +20,12 @@ class MyRunnable1 extends JFrame implements Runnable {
 public class RunnableTest1 {
 
 	public static void main(String[] args) {
-
 		// 사용하는 방법
 		MyRunnable1 myRunnable1 = new MyRunnable1();
 		// Runnable을 구현한 객체는 Thread를 생성해서 매개변수에 담고
 		// Thread를 시작하면 된다.
+		myRunnable1.run();
+
 		Thread thread1 = new Thread(myRunnable1);
 		thread1.start();
 
