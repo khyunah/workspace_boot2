@@ -119,6 +119,20 @@ public class MiniGame extends JFrame implements ActionListener {
 		});
 		this.requestFocusInWindow();
 	} // end of addEventListener
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// 누른버튼이 무엇인지 코드받아 온것
+		JButton targetBtn = (JButton) e.getSource();
+		if (startBtn == targetBtn) {
+			System.out.println("d 1");
+			isThread = true;
+		} else {
+			System.out.println("d 2");
+			isThread = false;
+		}
+		this.requestFocusInWindow();
+	}
 
 	private class CustomJPanel extends JPanel implements Runnable {
 
@@ -143,12 +157,12 @@ public class MiniGame extends JFrame implements ActionListener {
 						enermyX -= 10;
 					}
 
-					if (enermyX == 400) {
+					if (enermyX == 500) {
 						direction = false;
 						enemyImage = enemyImageL;
 					}
 
-					if (enermyX == 10) {
+					if (enermyX == 50) {
 						direction = true;
 						enemyImage = enemyImageR;
 					}
@@ -163,20 +177,6 @@ public class MiniGame extends JFrame implements ActionListener {
 			}
 		}
 	} // end of inner class
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// 누른버튼이 무엇인지 코드받아 온것
-		JButton targetBtn = (JButton) e.getSource();
-		if (startBtn == targetBtn) {
-			System.out.println("d 1");
-			isThread = true;
-		} else {
-			System.out.println("d 2");
-			isThread = false;
-		}
-		this.requestFocusInWindow();
-	}
 
 	public static void main(String[] args) {
 		new MiniGame();

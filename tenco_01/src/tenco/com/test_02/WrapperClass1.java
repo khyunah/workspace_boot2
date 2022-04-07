@@ -4,14 +4,11 @@ public class WrapperClass1 {
 
 	public static void main(String[] args) {
 
-		Integer num = new Integer(100);	// 박싱
-		Number n1 = 10;
+		Integer itegerNum1 = new Integer(100);	// 박싱
+		Integer integerNum2 = 200;				// 자동 박싱 new Integer(200) 생략
+		Number number1 = 10; 					// 자동 박싱 new Integer(10) 생략
 		
-		int n = num.intValue();	// 언박싱
-		System.out.println(n);
-		System.out.println();
-		
-		Integer num1 = 200;	// 자동 박싱 new Integer(200);
-		int num10 = num1;	// 자동 언박싱 num1.intValue();
+		int intNum1 = itegerNum1.intValue();	// 언박싱
+		int intNum2 = integerNum2;				// 자동 언박싱 num1.intValue() 생략
 	}
 }

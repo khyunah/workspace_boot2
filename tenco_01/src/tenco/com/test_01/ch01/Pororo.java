@@ -9,6 +9,6 @@ public class Pororo extends ToyMaterial {
 	
 	@Override
 	public String toString() {
-		return "뽀로로 만드는 재료 입니다.";
+		return "뽀로로";
 	}
 }

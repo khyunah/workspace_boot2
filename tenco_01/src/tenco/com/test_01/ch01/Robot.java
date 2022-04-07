@@ -9,6 +9,6 @@ public class Robot extends ToyMaterial {
 	
 	@Override
 	public String toString() {
-		return "로봇 만드는 재료 입니다.";
+		return "로봇";
 	}
 }

@@ -14,6 +14,6 @@ public class ToyFactory<T extends ToyMaterial> {
 
 	@Override
 	public String toString() {
-		return getToyMaterial().toString();
+		return toyMaterial + " 만드는 중";
 	}
 }
