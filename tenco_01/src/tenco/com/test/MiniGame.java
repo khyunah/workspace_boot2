@@ -47,7 +47,6 @@ public class MiniGame extends JFrame implements ActionListener {
 		addEventListener();
 
 		new Thread(customJPanel).start();
-
 	}
 
 	private void initData() {
