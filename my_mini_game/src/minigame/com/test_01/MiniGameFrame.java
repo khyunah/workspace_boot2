@@ -28,7 +28,7 @@ public class MiniGameFrame extends JFrame {
 	
 	private void initSetting() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1000, 580);
+		setSize(1000, 500);
 		setLocationRelativeTo(null);
 		setLayout(null);
 	}

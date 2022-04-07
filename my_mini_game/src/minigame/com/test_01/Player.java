@@ -12,12 +12,16 @@ public class Player extends JLabel implements Moveable {
 	private boolean right;
 	private boolean up;
 	private boolean down;
+	
+	private boolean upNextDown;
 
 	private final int SPEED = 4;
-	private final int JUMPSPEED = 2;
+	private final int JUMP_HEIGHT = 2;
 
 	private ImageIcon playerR;
 	private ImageIcon playerL;
+	
+	
 
 	public boolean isLeft() {
 		return left;
@@ -63,12 +67,14 @@ public class Player extends JLabel implements Moveable {
 
 	private void initSetting() {
 		x = 80;
-		y = 320;
+		y = 270;
 
 		left = false;
 		right = false;
 		up = false;
 		down = false;
+		
+		upNextDown = false;
 
 		setIcon(playerR);
 		setSize(200, 200);
@@ -125,12 +131,13 @@ public class Player extends JLabel implements Moveable {
 
 	@Override
 	public void up() {
+		upNextDown = true;
 		up = true;
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				for (int i = 0; i < 120; i++) {
-					y = y - JUMPSPEED;
+				for (int i = 0; i < 70; i++) {
+					y = y - JUMP_HEIGHT;
 					setLocation(x, y);
 					try {
 						Thread.sleep(5);
@@ -138,8 +145,8 @@ public class Player extends JLabel implements Moveable {
 						e.printStackTrace();
 					}
 				}
-				up = false;
 				down();
+				up = false;
 			}
 		}).start();
 	}
@@ -150,13 +157,26 @@ public class Player extends JLabel implements Moveable {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				for (int i = 0; i < 60; i++) {
-					y = y + JUMPSPEED;
-					setLocation(x, y);
-					try {
-						Thread.sleep(3);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+				if (upNextDown == true) {
+					for (int i = 0; i < 7; i++) {
+						y = y + JUMP_HEIGHT;
+						setLocation(x, y);
+						try {
+							Thread.sleep(3);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					upNextDown = false;
+				} else {
+					for (int i = 0; i < 63; i++) {
+						y = y + JUMP_HEIGHT;
+						setLocation(x, y);
+						try {
+							Thread.sleep(3);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 				down = false;
