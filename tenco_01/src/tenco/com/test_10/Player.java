@@ -26,38 +26,6 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerR;
 	private ImageIcon playerL;
 
-	public void setLeft(boolean left) {
-		this.left = left;
-	}
-
-	public void setRight(boolean right) {
-		this.right = right;
-	}
-
-	public void setUp(boolean up) {
-		this.up = up;
-	}
-
-	public void setDown(boolean down) {
-		this.down = down;
-	}
-
-	public boolean isLeft() {
-		return left;
-	}
-
-	public boolean isRight() {
-		return right;
-	}
-
-	public boolean isUp() {
-		return up;
-	}
-
-	public boolean isDown() {
-		return down;
-	}
-
 	public int getX() {
 		return x;
 	}
@@ -74,6 +42,38 @@ public class Player extends JLabel implements Moveable {
 		this.y = y;
 	}
 
+	public boolean isLeft() {
+		return left;
+	}
+
+	public void setLeft(boolean left) {
+		this.left = left;
+	}
+
+	public boolean isRight() {
+		return right;
+	}
+
+	public void setRight(boolean right) {
+		this.right = right;
+	}
+
+	public boolean isUp() {
+		return up;
+	}
+
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+
+	public boolean isDown() {
+		return down;
+	}
+
+	public void setDown(boolean down) {
+		this.down = down;
+	}
+
 	public boolean isLeftWallCrash() {
 		return leftWallCrash;
 	}
@@ -88,6 +88,30 @@ public class Player extends JLabel implements Moveable {
 
 	public void setRightWallCrash(boolean rightWallCrash) {
 		this.rightWallCrash = rightWallCrash;
+	}
+
+	public ImageIcon getPlayerR() {
+		return playerR;
+	}
+
+	public void setPlayerR(ImageIcon playerR) {
+		this.playerR = playerR;
+	}
+
+	public ImageIcon getPlayerL() {
+		return playerL;
+	}
+
+	public void setPlayerL(ImageIcon playerL) {
+		this.playerL = playerL;
+	}
+
+	public int getSPEED() {
+		return SPEED;
+	}
+
+	public int getJUMPSPEED() {
+		return JUMPSPEED;
 	}
 
 	public Player() {
@@ -205,6 +229,8 @@ public class Player extends JLabel implements Moveable {
 						e.printStackTrace();
 					}
 				}
+				down = false;
+				System.out.println("2222");
 
 //				for (int i = 0; i < (130 / JUMPSPEED); i++) {
 //					y = y + JUMPSPEED;
@@ -215,7 +241,6 @@ public class Player extends JLabel implements Moveable {
 //						e.printStackTrace();
 //					}
 //				}
-//				down = false;
 			}
 		}).start();
 	}

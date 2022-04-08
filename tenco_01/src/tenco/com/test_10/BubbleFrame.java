@@ -21,7 +21,7 @@ public class BubbleFrame extends JFrame {
 	}
 
 	private void initObject() {
-		backgroundMqp = new JLabel(new ImageIcon("images/backgroundMapService.png"));
+		backgroundMqp = new JLabel(new ImageIcon("images/backgroundMap.png"));
 		setContentPane(backgroundMqp);
 
 		player = new Player();
@@ -58,9 +58,9 @@ public class BubbleFrame extends JFrame {
 						player.up();
 					}
 					break;
-				case KeyEvent.VK_DOWN:
-					player.down();
-					break;
+//				case KeyEvent.VK_DOWN:
+//					player.down();
+//					break;
 				default:
 					break;
 				}
