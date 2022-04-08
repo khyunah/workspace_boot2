@@ -56,8 +56,8 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	private void initSetting() {
-		playerY = 270;
 		playerX = 50;
+		playerY = 270;
 
 		isRun = true;
 
@@ -75,7 +75,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	// Thread 사용하는 이유 : 애니메이션 효과를 내기위해
-	// 사용하지 않으면 영상처럼 움직이는게 아닌 이동한 만큼의 위치로 바로 나타나기 떄문
+	// 사용하지 않으면 영상처럼 움직이는게 아닌 이동한 만큼의 위치로 바로 나타나기 때문
 	@Override
 	public void left() {
 		System.out.println("left들어옴");
@@ -86,9 +86,9 @@ public class Player extends JLabel implements Moveable {
 				System.out.println("run들어옴");
 				// Thread를 구현한 상태에서 while문을 사용하는 이유 :
 				// Thread생성이 계속 되는 것을 막기위해.
-				// 키를 계속 누르고 있으면 1초마다 다시 이벤트가 일어나는데, 계속 left()를 실행호출하여
+				// 키를 계속 누르고 있으면 일정시간만에 다시 이벤트가 일어나는데, 계속 left()를 실행호출하여
 				// Thread가 엄청 많아지고 더 빠른속도로 작업을 한다.
-				// 무한 반복을 하기때문에 키보드 한번만 누르면 무한 반복해서 화면 밖으로 사라짐
+				// 무한 반복을 하기때문에 키보드 한번만 길게 누르면 무한 반복해서 화면 밖으로 사라짐
 				// 그래서 boolean 변수를 주어 while문에게 멈추고 떼고를 알려주었다.
 				// keyReleased()를 이용해서 키보드에 손을 떼면 while문이 멈추게끔 해야한다. ㅡ> boolean 변수 존재이유
 				while (left) {
