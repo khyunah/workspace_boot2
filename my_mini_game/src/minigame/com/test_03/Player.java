@@ -119,7 +119,6 @@ public class Player extends JLabel implements Moveable {
 	
 	public void booster() {
 		if(booster) {
-			System.out.println("부스터실행");
 			speed = 10;
 		}
 	}

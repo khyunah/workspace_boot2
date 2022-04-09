@@ -58,7 +58,7 @@ public class MiniGameFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_CONTROL:
-					player.setBooster(true);
+					player.setBooster(true); 
 					break;
 				}
 			}
