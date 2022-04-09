@@ -58,12 +58,6 @@ public class BackgroundMapService extends Thread {
 					player.setLeftWallCrash(false);
 					player.setRightWallCrash(false);
 				}
-
-				try {
-					Thread.sleep(3);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 			} catch (Exception e) {
 //				System.out.println("ArrayIndexOutOfBoundsException 오류발생");
 			}

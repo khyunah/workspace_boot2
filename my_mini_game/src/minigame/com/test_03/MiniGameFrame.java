@@ -57,6 +57,9 @@ public class MiniGameFrame extends JFrame {
 						player.up();
 					}
 					break;
+				case KeyEvent.VK_CONTROL:
+					player.setBooster(true);
+					break;
 				}
 			}
 
@@ -69,6 +72,8 @@ public class MiniGameFrame extends JFrame {
 				case KeyEvent.VK_RIGHT:
 					player.setRight(false);
 					break;
+				case KeyEvent.VK_CONTROL:
+					player.setBooster(false);
 				}
 			}
 		});

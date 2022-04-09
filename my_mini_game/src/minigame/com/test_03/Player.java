@@ -11,7 +11,7 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerR;
 	private ImageIcon playerL;
 
-	private final int SPEED = 4;
+	private int speed = 4;
 	private final int JUMP_HEIGHT = 2;
 
 	private boolean left;
@@ -21,6 +21,8 @@ public class Player extends JLabel implements Moveable {
 
 	private boolean leftWallCrash;
 	private boolean rightWallCrash;
+	
+	private boolean booster;
 
 	public boolean isLeft() {
 		return left;
@@ -70,6 +72,14 @@ public class Player extends JLabel implements Moveable {
 		this.rightWallCrash = rightWallCrash;
 	}
 
+	public boolean isBooster() {
+		return booster;
+	}
+
+	public void setBooster(boolean booster) {
+		this.booster = booster;
+	}
+
 	public Player() {
 		initData();
 		initSetting();
@@ -96,6 +106,8 @@ public class Player extends JLabel implements Moveable {
 
 		leftWallCrash = false;
 		rightWallCrash = false;
+		
+		booster = false;
 
 		// JLabel에 이미지를 올리려면 ImageIcon 타입이어야 하고,
 		// add대신에 setIcon()을 사용하여 이미지 올려줌.
@@ -103,6 +115,13 @@ public class Player extends JLabel implements Moveable {
 		// 위치와 크기를 지정해주어야 화면에 나타남
 		setSize(50, 60);
 		setLocation(playerX, playerY);
+	}
+	
+	public void booster() {
+		if(booster) {
+			System.out.println("부스터실행");
+			speed = 10;
+		}
 	}
 
 	// Thread 사용하는 이유 : 애니메이션 효과를 내기위해
@@ -125,10 +144,12 @@ public class Player extends JLabel implements Moveable {
 				while (left) {
 					System.out.println("while문 들어옴");
 					setIcon(playerL);
-					playerX = playerX - SPEED;
+					booster();
+					playerX = playerX - speed;
 					// JPanel을 이용해서 paint()로 이미지를 그릴때는 repaint()를 이용했는데
 					// JLabel은 setLocation을 이용해서 이미지 위치를 다시 그려준다.
 					setLocation(playerX, playerY);
+					speed = 4;
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
@@ -148,8 +169,10 @@ public class Player extends JLabel implements Moveable {
 			public void run() {
 				while (right) {
 					setIcon(playerR);
-					playerX = playerX + SPEED;
+					booster();
+					playerX = playerX + speed;
 					setLocation(playerX, playerY);
+					speed = 4;
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
