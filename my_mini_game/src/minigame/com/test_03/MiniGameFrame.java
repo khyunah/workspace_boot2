@@ -11,6 +11,7 @@ public class MiniGameFrame extends JFrame {
 
 	private JLabel backgroundMap;
 	private Player player;
+	private BackgroundMap2Label map2Label;
 
 	public MiniGameFrame() {
 		initData();
@@ -60,6 +61,9 @@ public class MiniGameFrame extends JFrame {
 				case KeyEvent.VK_CONTROL:
 					player.setBooster(true); 
 					break;
+				case KeyEvent.VK_Z:
+					map2Label = new BackgroundMap2Label();
+					setContentPane(map2Label);
 				}
 			}
 
