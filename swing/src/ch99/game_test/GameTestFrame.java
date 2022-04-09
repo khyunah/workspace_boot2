@@ -29,6 +29,7 @@ public class GameTestFrame extends JFrame {
 		add(panel);
 
 		setVisible(true);
+		this.requestFocusInWindow();
 	}
 
 	private void initEventListener() {
@@ -63,7 +64,7 @@ public class GameTestFrame extends JFrame {
 				}
 			}
 		});
-
+		this.requestFocusInWindow();
 	}
 
 	public static void main(String[] args) {
