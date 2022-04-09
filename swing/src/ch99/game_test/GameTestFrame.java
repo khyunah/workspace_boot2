@@ -27,6 +27,7 @@ public class GameTestFrame extends JFrame {
 	private void initSetting() {
 		add(playerLabel);
 		add(panel);
+
 		setVisible(true);
 	}
 
@@ -45,17 +46,19 @@ public class GameTestFrame extends JFrame {
 					break;
 				case KeyEvent.VK_CONTROL:
 					playerLabel.isBooster = true;
+					break;
+				case KeyEvent.VK_Z:
+					playerLabel.isSmokeStack = true;
+					new Thread(panel).start();
+					break;
 				}
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_CONTROL:
 					playerLabel.isBooster = false;
-					break;
-
-				default:
 					break;
 				}
 			}

@@ -10,12 +10,12 @@ public class GameTestPlayerLabel extends JLabel {
 
 	int playerX;
 	int playerY;
-	
+
 	int speed;
-	
+
 	boolean isBooster;
-	
-	
+
+	boolean isSmokeStack;
 
 	public GameTestPlayerLabel() {
 		initObject();
@@ -29,34 +29,49 @@ public class GameTestPlayerLabel extends JLabel {
 
 	private void initSetting() {
 		playerX = 100;
-		playerY = 100;
-		
+		playerY = 430;
+
 		isBooster = false;
+		isSmokeStack = false;
 
 		setSize(50, 50);
 		setIcon(playerRImg);
 		setLocation(playerX, playerY);
 	}
-	
+
 	public void booster() {
-		if(isBooster) {
+		if (isBooster) {
 			speed = 20;
 		}
 	}
 
 	public void left() {
-		setIcon(playerLImg);
-		booster();
-		playerX = playerX - speed;
-		setLocation(playerX, playerY);
-		speed = 4;
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				setIcon(playerLImg);
+				booster();
+				playerX = playerX - speed;
+				setLocation(playerX, playerY);
+				speed = 4;
+			}
+		}).start();
 	}
-	
+
 	public void right() {
-		setIcon(playerRImg);
-		booster();
-		playerX = playerX + speed;
-		setLocation(playerX, playerY);
-		speed = 4;
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				setIcon(playerRImg);
+				booster();
+				playerX = playerX + speed;
+				setLocation(playerX, playerY);
+				speed = 4;
+			}
+		}).start();
 	}
 }
