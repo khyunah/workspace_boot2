@@ -246,16 +246,6 @@ public class Player extends JLabel implements Moveable {
 				}
 				System.out.println("2222");
 				down = false;
-
-//				for (int i = 0; i < (130 / JUMPSPEED); i++) {
-//					y = y + JUMPSPEED;
-//					setLocation(x, y);
-//					try {
-//						Thread.sleep(3);
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//				}
 			}
 		}).start();
 	}
