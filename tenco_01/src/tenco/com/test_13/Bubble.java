@@ -129,11 +129,11 @@ public class Bubble extends JLabel implements Moveable {
 
 		setIcon(bubble);
 		setSize(50, 50);
-//		setLocation(x, y);
 
 		state = 0;
 	}
 
+	// 물방울 스레드
 	private void initThread() {
 
 		new Thread(new Runnable() {

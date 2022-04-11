@@ -131,7 +131,6 @@ public class Player extends JLabel implements Moveable {
 		initBackgroundPlayerService();
 	}
 
-	// 백그라운드는 계속 돌아가게 만들어야함 ㅡ> 스레드 사용해야함
 	private void initBackgroundPlayerService() {
 		new Thread(new BackgroundPlayerService(this)).start();
 	}
@@ -205,7 +204,6 @@ public class Player extends JLabel implements Moveable {
 		}).start();
 	}
 
-	// left + up, right + up
 	@Override
 	public void up() {
 		System.out.println("up");
@@ -246,16 +244,6 @@ public class Player extends JLabel implements Moveable {
 				}
 				System.out.println("2222");
 				down = false;
-
-//				for (int i = 0; i < (130 / JUMPSPEED); i++) {
-//					y = y + JUMPSPEED;
-//					setLocation(x, y);
-//					try {
-//						Thread.sleep(3);
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//				}
 			}
 		}).start();
 	}
