@@ -5,10 +5,7 @@ import javax.swing.JLabel;
 
 public class Bubble extends JLabel implements Moveable {
 
-	// 버블 쏘는 위치 참조
-	// 의존성 컴포지션 관계
 	private Player player;
-	// 하나의 버블만 감시할 예정
 	private BackgroundBubbleObserver backgroundBubbleObserver;
 
 	// 위치 상태
@@ -132,7 +129,6 @@ public class Bubble extends JLabel implements Moveable {
 
 		setIcon(bubble);
 		setSize(50, 50);
-//		setLocation(x, y);
 
 		state = 0;
 	}
@@ -158,8 +154,6 @@ public class Bubble extends JLabel implements Moveable {
 		for (int i = 0; i < 400; i++) {
 			x--;
 			setLocation(x, y);
-			// BackgroundBubbleObserver 여기서 스레드 쓰지않고 여기서 메소드 호출할 것.
-			// 현재 색상 체크
 			if (backgroundBubbleObserver.checkLeftWall()) {
 				left = false;
 				break;
