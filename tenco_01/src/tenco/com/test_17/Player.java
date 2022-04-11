@@ -38,7 +38,6 @@ public class Player extends JLabel implements Moveable {
 		initBackgroundPlayerService();
 	}
 
-	// 백그라운드는 계속 돌아가게 만들어야함 ㅡ> 스레드 사용해야함
 	private void initBackgroundPlayerService() {
 		new Thread(new BackgroundPlayerService(this)).start();
 	}
@@ -112,7 +111,6 @@ public class Player extends JLabel implements Moveable {
 		}).start();
 	}
 
-	// left + up, right + up
 	@Override
 	public void up() {
 		System.out.println("up");
@@ -161,5 +159,4 @@ public class Player extends JLabel implements Moveable {
 	public Bubble attackBubble() {
 		return new Bubble(this);
 	}
-
 } // end of class

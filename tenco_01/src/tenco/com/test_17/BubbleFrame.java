@@ -29,8 +29,8 @@ public class BubbleFrame extends JFrame {
 
 	private void initSetting() {
 		setSize(1000, 640);
-		setLayout(null); // 좌표값으로 자유롭게 그릴수 있다. absolute 개념
-		setLocationRelativeTo(null); // 윈도우창 가운데에 배치하기 null로 설정
+		setLayout(null);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -59,8 +59,6 @@ public class BubbleFrame extends JFrame {
 				case KeyEvent.VK_SPACE:
 					add(player.attackBubble());
 					break;
-				default:
-					break;
 				}
 			} // end of keyPressed
 
@@ -73,8 +71,6 @@ public class BubbleFrame extends JFrame {
 					break;
 				case KeyEvent.VK_RIGHT:
 					player.setRight(false);
-					break;
-				default:
 					break;
 				}
 			}
