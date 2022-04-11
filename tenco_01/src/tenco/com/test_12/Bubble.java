@@ -128,7 +128,6 @@ public class Bubble extends JLabel {
 
 		setIcon(bubble);
 		setSize(50, 50);
-//		setLocation(x, y);
 
 		state = 0;
 	}
