@@ -205,7 +205,6 @@ public class Player extends JLabel implements Moveable {
 		}).start();
 	}
 
-	// left + up, right + up
 	@Override
 	public void up() {
 		System.out.println("up");
@@ -244,18 +243,7 @@ public class Player extends JLabel implements Moveable {
 						e.printStackTrace();
 					}
 				}
-				System.out.println("2222");
 				down = false;
-
-//				for (int i = 0; i < (130 / JUMPSPEED); i++) {
-//					y = y + JUMPSPEED;
-//					setLocation(x, y);
-//					try {
-//						Thread.sleep(3);
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//				}
 			}
 		}).start();
 	}

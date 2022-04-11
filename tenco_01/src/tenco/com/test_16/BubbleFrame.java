@@ -43,7 +43,6 @@ public class BubbleFrame extends JFrame {
 			// 이벤트가 일어난 시점
 			@Override
 			public void keyPressed(KeyEvent e) {
-//				System.out.println(e.getKeyCode());
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
 					if (!player.isLeft() && !player.isLeftWallCrash()) {
@@ -61,11 +60,8 @@ public class BubbleFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_SPACE:
-//					Bubble bubble = new Bubble(player);
 					Bubble bubble = new Bubble(mContext);
 					add(bubble);
-					break;
-				default:
 					break;
 				}
 			} // end of keyPressed
@@ -79,8 +75,6 @@ public class BubbleFrame extends JFrame {
 					break;
 				case KeyEvent.VK_RIGHT:
 					player.setRight(false);
-					break;
-				default:
 					break;
 				}
 			}
