@@ -131,7 +131,7 @@ public class Bubble extends JLabel implements Moveable {
 			bubbleContext = null;
 			setIcon(null); // ㅡ> 전체 도화지를 다시 그리는 것이 아니라 버블하나만 다시 그리게 됨.
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			e.printStackTrace();  
 		}
 	}
 
