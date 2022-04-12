@@ -30,7 +30,7 @@ public class DataStructureTest3 {
 		System.out.println(set1);
 
 		// 전체삭제
-		set1.clear();
+//		set1.clear();
 
 		// while문 사용
 		Iterator<Integer> iter = set1.iterator();
