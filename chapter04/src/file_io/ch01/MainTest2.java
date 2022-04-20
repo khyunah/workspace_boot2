@@ -1,25 +1,24 @@
 package file_io.ch01;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
 
 public class MainTest2 {
 
-	public static PrintStream out;
-	public static InputStream in;
-
 	public static void main(String[] args) {
-
-		// 표준 출력 스트림 ( 모니터 )
-		// System.out
-		System.out.println("출력 스트림 모니터");
+		System.out.println("알파벳 여러개 쓰고 엔터");
+		int i;
 		
-		// 표준 입력 스트림 ( 키보드 )
-		// System.in
 		try {
-			int k = System.in.read();
-			System.out.println("K : " + k);
+			// 알파벳 여러개를 쓰고 화면에 출력 할 수 있도록 코드 변경하기 
+//			i = System.in.read();
+//			System.out.println(i);
+			
+			// 엔터를 뜻하는 이스케이프 문자 '\n'이 아닐때는 계속 반복.
+			while( ( i = System.in.read() ) != '\n' ) {
+				System.out.print("i : " + i + " ");
+				System.out.print((char)i);
+				System.out.print("\t");
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
