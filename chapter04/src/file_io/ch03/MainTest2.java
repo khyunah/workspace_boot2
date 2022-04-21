@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 
 /**
  * 
- * @author ITPS 바이트 단위 출력 / 파일에 한 바이트씩 쓰기 / 없으면 -1 반환
+ * @author ITPS 바이트 단위 출력 / 파일에 한 바이트씩 쓰기
  * byte[] 배열 A-Z까지 넣고 한번에 파일에 쓰기 
  */
 public class MainTest2 {
