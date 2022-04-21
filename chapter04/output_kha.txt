@@ -1,1 +1,5 @@
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
+A
+안녕하세요. FileWriter는 String 문자열도 가능해요!
+ABCDEFGHIJ
+다라마바사아자
+EFGHIJ
