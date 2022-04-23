@@ -18,9 +18,11 @@ public class MessageFrame extends JFrame {
 	
 	CallBackSaveBtn callBackSaveBtn;
 
-	public MessageFrame() {
+	public MessageFrame(CallBackSaveBtn callBackSaveBtn) {
+		this.callBackSaveBtn = callBackSaveBtn;
 		initObject();
 		initSetting();
+		initListener();
 	}
 
 	private void initObject() {
@@ -39,9 +41,10 @@ public class MessageFrame extends JFrame {
 		panel.setLayout(null);
 
 		pullMessage.setBounds(45, 20, 400, 400);
+		pullMessage.setEnabled(false);
 		pushMessage.setBounds(45, 440, 400, 30);
 
-		pushButton.setBounds(200, 500, 70, 30);
+		pushButton.setBounds(200, 500, 90, 30);
 		pushButton.setBackground(Color.WHITE);
 
 		panel.add(pullMessage);
@@ -56,10 +59,9 @@ public class MessageFrame extends JFrame {
 		pushButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
 				String msg = pushMessage.getText();
 				callBackSaveBtn.saveFile(msg);
-				
+				pushMessage.setText("");
 			}
 		});
 	}

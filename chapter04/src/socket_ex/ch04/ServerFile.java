@@ -8,7 +8,7 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerFile extends MessageFrame implements CallBackSaveBtn {
+public class ServerFile implements CallBackSaveBtn {
 
 	ServerSocket serverSocket;
 	Socket socket;
@@ -19,9 +19,15 @@ public class ServerFile extends MessageFrame implements CallBackSaveBtn {
 
 	BufferedWriter bufferedWriter; // 클라이언트 쪽으로 데이터를 보내는 녀석
 	BufferedReader keyboardBufferedReader; // 입력 받을 녀석
+	
+	//////////////////////////////////////////////////////////
+	
+	MessageFrame frame;
+	String pushMessage;
 
 	public ServerFile() {
-
+		
+		frame = new MessageFrame(this);
 		try {
 			System.out.println("1. >>>>> 서버 소켓 시작 <<<<<");
 			serverSocket = new ServerSocket(10000);
@@ -47,8 +53,8 @@ public class ServerFile extends MessageFrame implements CallBackSaveBtn {
 
 			while (true) {
 				String msg = bufferedReader.readLine();
-				super.pullMessage.setText("클라이언트가 보낸 메세지 : " + msg);
-				System.out.println("4. 클라이언트로 받은 메세지 : " + msg);
+				frame.pullMessage.setText(frame.pullMessage.getText() + "클라이언트가 보낸 메세지 : " + msg + "\n");
+				System.out.println("클라이언트로 받은 메세지 : " + msg);
 			}
 
 		} catch (IOException e) {
@@ -82,10 +88,9 @@ public class ServerFile extends MessageFrame implements CallBackSaveBtn {
 					String msg = keyboardBufferedReader.readLine();
 
 					// 클라이언트로 데이터 보내기 ㅡ> 소켓 연결
-					bufferedWriter.write("서버가 보낸 메세지 : " + msg);
+					bufferedWriter.write(msg);
 					bufferedWriter.write("\n");
 					bufferedWriter.flush();
-
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -95,11 +100,21 @@ public class ServerFile extends MessageFrame implements CallBackSaveBtn {
 
 	@Override
 	public void saveFile(String msg) {
-		try {
-			bufferedWriter.write(msg);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.pushMessage = msg;
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					bufferedWriter.write(msg + "\n");
+					bufferedWriter.flush();
+					frame.pullMessage.setText(frame.pullMessage.getText() + "내가 보낸 메세지 : " + pushMessage + "\n");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+		
 	}
 
 	public static void main(String[] args) {

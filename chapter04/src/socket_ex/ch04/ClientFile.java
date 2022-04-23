@@ -40,6 +40,7 @@ public class ClientFile {
 
 			System.out.println("3. 키보드 버퍼 연결");
 			keybordBufferedReader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("4. 키보드 입력 대기");
 
 			// 초기화 처리
 			bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -54,7 +55,6 @@ public class ClientFile {
 			thread.start();
 
 			while (true) {
-				System.out.println("4. 키보드 입력 대기");
 				String msg = keybordBufferedReader.readLine();
 				System.out.println("내가 보낸 메세지 : " + msg);
 				bufferedWriter.write(msg + "\n");
@@ -86,7 +86,7 @@ public class ClientFile {
 			while (true) {
 
 				try {
-					String msg = bufferedReader.readLine();
+					String msg = bufferedReader.readLine();	// 엔터를 구분점으로 삼는다.
 					System.out.println("서버로부터 받은 메세지 : " + msg);
 					
 					saveFile.write(msg + "\n");
@@ -96,7 +96,6 @@ public class ClientFile {
 				}
 			}
 		}
-
 	}
 
 	public static void main(String[] args) {
