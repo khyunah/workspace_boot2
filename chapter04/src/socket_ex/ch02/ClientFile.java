@@ -19,7 +19,7 @@ public class ClientFile {
 	Socket socket;
 	BufferedWriter bufferedWriter;
 
-	final String IP = "192.168.4.10";
+	final String IP = "127.0.0.1";
 	final int PORT = 10000;
 
 	BufferedReader keybordBufferedReader;
