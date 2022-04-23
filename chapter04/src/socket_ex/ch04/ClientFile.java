@@ -1,6 +1,5 @@
 package socket_ex.ch04;
 
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -97,7 +96,7 @@ public class ClientFile implements CallBackSendBtn {
 					String msg = bufferedReader.readLine();	// 엔터를 구분점으로 삼는다.
 					System.out.println("서버로부터 받은 메세지 : " + msg);
 					
-					frame.pullMessage.setText(frame.pullMessage.getText() + "클라이언트가 보낸 메세지 : " + msg + "\n");
+					frame.pullMessage.setText(frame.pullMessage.getText() + "서버가 보낸 메세지 : " + msg + "\n");
 					
 					// 서버에게 받은 메세지 파일에 저장해보기
 					saveFile.write(msg + "\n");

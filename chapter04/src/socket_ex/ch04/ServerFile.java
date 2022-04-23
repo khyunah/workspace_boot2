@@ -1,6 +1,5 @@
 package socket_ex.ch04;
 
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
