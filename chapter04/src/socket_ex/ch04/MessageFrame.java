@@ -16,9 +16,9 @@ public class MessageFrame extends JFrame {
 	JTextArea pushMessage;
 	JButton pushButton;
 	
-	CallBackSaveBtn callBackSaveBtn;
+	CallBackSendBtn callBackSaveBtn;
 
-	public MessageFrame(CallBackSaveBtn callBackSaveBtn) {
+	public MessageFrame(CallBackSendBtn callBackSaveBtn) {
 		this.callBackSaveBtn = callBackSaveBtn;
 		initObject();
 		initSetting();
@@ -42,6 +42,7 @@ public class MessageFrame extends JFrame {
 
 		pullMessage.setBounds(45, 20, 400, 400);
 		pullMessage.setEnabled(false);
+		pullMessage.setForeground(Color.BLACK);
 		pushMessage.setBounds(45, 440, 400, 30);
 
 		pushButton.setBounds(200, 500, 90, 30);
@@ -60,7 +61,7 @@ public class MessageFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String msg = pushMessage.getText();
-				callBackSaveBtn.saveFile(msg);
+				callBackSaveBtn.sendBtn(msg);
 				pushMessage.setText("");
 			}
 		});

@@ -1,5 +1,6 @@
 package socket_ex.ch04;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -9,7 +10,7 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class ClientFile {
+public class ClientFile implements CallBackSendBtn {
 
 	Socket socket;
 	BufferedWriter bufferedWriter;
@@ -28,9 +29,14 @@ public class ClientFile {
 	///////////////////////////////////////////////////////////////////
 	
 	BufferedWriter saveFile;
+	
+	////////////////////////////////////////////////////////////////////
+	
+	MessageFrame frame;
 
 	public ClientFile() {
-
+		frame = new MessageFrame(this);
+		frame.setTitle("클라이언트의 토크토크 창");
 		try {
 			System.out.println("1. 클라이언트 소켓 시작");
 			socket = new Socket(IP, PORT);
@@ -54,9 +60,11 @@ public class ClientFile {
 			Thread thread = new Thread(readThread);
 			thread.start();
 
+			// 콘솔창에서 보내는 메세지
 			while (true) {
 				String msg = keybordBufferedReader.readLine();
 				System.out.println("내가 보낸 메세지 : " + msg);
+				
 				bufferedWriter.write(msg + "\n");
 				bufferedWriter.flush();
 			}
@@ -89,12 +97,28 @@ public class ClientFile {
 					String msg = bufferedReader.readLine();	// 엔터를 구분점으로 삼는다.
 					System.out.println("서버로부터 받은 메세지 : " + msg);
 					
+					frame.pullMessage.setText(frame.pullMessage.getText() + "클라이언트가 보낸 메세지 : " + msg + "\n");
+					
+					// 서버에게 받은 메세지 파일에 저장해보기
 					saveFile.write(msg + "\n");
 					saveFile.flush();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+	
+
+	@Override
+	public void sendBtn(String msg) {
+		try {
+			bufferedWriter.write(msg + "\n");
+			bufferedWriter.flush();
+			
+			frame.pullMessage.setText(frame.pullMessage.getText() + "내가 보낸 메세지 : " + msg + "\n");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
