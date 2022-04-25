@@ -7,11 +7,15 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Vector;
 
-public class Client extends ClientFrame {
-
+public class Client implements CallBackService {
+	
 	// 프레임 창
-	private ClientFrame messageFrame;
+	private ClientFrame clientFrame;
+	
+	// 사용자 이름, 룸이름 벡터 만들기
+//	private Vector<E>
 
 	// 소켓 장치
 	private Socket socket;
@@ -24,34 +28,61 @@ public class Client extends ClientFrame {
 	private String ip = "127.0.0.1";
 	private int port = 10000;
 	
-	private String name;
-
-	public Client(String name) {
-		super(name);
+	public Client() {
+		clientFrame = new ClientFrame(this);
 	}
 
-	private void initObject() {
-		// 프레임 창
-		
-		// 소켓 장치
+	private void connectNetwork() {
 		try {
+			
+			// 소켓 장치
 			socket = new Socket(ip, port);
+			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		// 입출력 장치
+	}
+
+	private void connectIO() {
 		try {
+			
+			// 입출력 장치
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	@Override
+	public void sendMessage(String messageText) {
+		try {
+			writer.write(messageText + "\n");
+			writer.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void connectServer(String ip, int port, String id) {
+		try {
+			connectNetwork();
+			connectIO();
+			writer.write(ip + "/" + port + "/" + id + "\n");
+			writer.flush();
+			System.out.println("클라이언트 입력 완료");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
-//		new Client();
+		new Client();
 	}
 }

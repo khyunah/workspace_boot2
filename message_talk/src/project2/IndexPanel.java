@@ -3,6 +3,8 @@ package project2;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +25,7 @@ public class IndexPanel extends JPanel {
 
 	private Image backgroundImage;
 	private JPanel backgroundPanel;
-	
+
 	private JPanel borderPanel;
 
 	private JPanel ipPanel;
@@ -40,16 +42,20 @@ public class IndexPanel extends JPanel {
 
 	private JButton connectBtn;
 
-	public IndexPanel() {
+	private CallBackService callBackService;
+
+	public IndexPanel(CallBackService callBackService) {
+		this.callBackService = callBackService;
 		initObject();
 		initSetting();
+		initListener();
 	}
 
 	private void initObject() {
-		//백그라운드 이미지 컴포넌트
-		backgroundImage = new ImageIcon("images/loginBackground.png").getImage();
+		// 백그라운드 이미지 컴포넌트
+		backgroundImage = new ImageIcon("images/background.png").getImage();
 		backgroundPanel = new JPanel();
-		
+
 		// 보더 컴포넌트
 		borderPanel = new JPanel();
 
@@ -80,40 +86,60 @@ public class IndexPanel extends JPanel {
 		backgroundPanel.setSize(getWidth(), getHeight());
 		backgroundPanel.setLayout(null);
 		add(backgroundPanel);
-		
+
 		// 보더 컴포넌트
-		borderPanel.setBounds(140, 90, 190, 380);
-		borderPanel.setBackground(new Color(0, 0, 0, 0));
-		borderPanel.setBorder(new TitledBorder(new LineBorder(Color.BLACK, 5),"Login"));
+		borderPanel.setBounds(100, 60, 190, 380);
+		borderPanel.setLayout(null);
+		borderPanel.setBackground(Color.WHITE);
+		borderPanel.setBorder(new TitledBorder(new LineBorder(Color.BLACK, 5), "Login"));
 		add(borderPanel);
-		
+
 		// IP 컴포넌트
-		ipPanel.setBounds(180, 120, 120, 100);
+		ipPanel.setBounds(30, 40, 120, 100);
 		ipPanel.setBackground(new Color(0, 0, 0, 0));
 		ipPanel.add(ipLabel);
 		ipPanel.add(inputIp);
-		add(ipPanel);
+		borderPanel.add(ipPanel);
 
 		// PORT 컴포넌트
-		portPanel.setBounds(180, 220, 120, 100);
+		portPanel.setBounds(30, 140, 120, 100);
 		portPanel.setBackground(new Color(0, 0, 0, 0));
 		portPanel.add(portLabel);
 		portPanel.add(inputPort);
-		add(portPanel);
+		borderPanel.add(portPanel);
 
 		// IP 컴포넌트
-		idPanel.setBounds(180, 320, 120, 100);
+		idPanel.setBounds(30, 240, 120, 100);
 		idPanel.setBackground(new Color(0, 0, 0, 0));
 		idPanel.add(idLabel);
 		idPanel.add(inputId);
-		add(idPanel);
+		borderPanel.add(idPanel);
 
 		// LoginBtn 컴포넌트
 		connectBtn.setBackground(Color.WHITE);
-		connectBtn.setBounds(180, 420, 120, 20);
-		add(connectBtn);
+		connectBtn.setBounds(30, 340, 120, 20);
+		borderPanel.add(connectBtn);
 	}
-	
+
+	private void initListener() {
+		connectBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				String ip = inputIp.getText();
+				String port1 = inputPort.getText();
+				int port = Integer.parseInt(port1);
+				String id = inputId.getText();
+
+				callBackService.connectServer(ip, port, id);
+
+				inputIp.setText("");
+				inputPort.setText("");
+				inputId.setText("");
+			}
+		});
+	}
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
