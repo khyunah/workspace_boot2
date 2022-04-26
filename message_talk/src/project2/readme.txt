@@ -3,6 +3,10 @@ ConnectedUser/ 지금 현재 연결되어 있는 유저 프로토콜
 NerUser/ 새로 들어온 유저 프로토콜
 Chatting/ 채팅창에서 보낸 메세지
 SecretMsg/ 귓속말
+Fail/MakeRoom
+EmptyRoom
+MakeRoom
+NewRoom
 
 기능
 

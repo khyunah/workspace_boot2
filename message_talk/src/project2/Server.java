@@ -23,7 +23,7 @@ public class Server implements CallBackService {
 	// 접속된 유저 벡터
 	private Vector<ConnectedUser> connectedUsers = new Vector<>();
 	// 만들어진 방 벡터
-	private Vector<MyRoom> madeMyRoom = new Vector<>();
+	private Vector<MyRoom> madeRooms = new Vector<>();
 
 	// 프레임 창
 	private ServerFrame serverFrame;
@@ -145,8 +145,8 @@ public class Server implements CallBackService {
 				}
 
 				// 방금 연결된 유저측에서 룸 명단 업데이트를 위한 출력
-				for (int i = 0; i < madeMyRoom.size(); i++) {
-					MyRoom myRoom = madeMyRoom.elementAt(i);
+				for (int i = 0; i < madeRooms.size(); i++) {
+					MyRoom myRoom = madeRooms.elementAt(i);
 					sendMsg("MadeRoom" + myRoom.roomName);
 				}
 
@@ -184,8 +184,8 @@ public class Server implements CallBackService {
 
 				serverFrame.getMainBoard().append("[메세지]" + msg);
 
-				for (int i = 0; i < madeMyRoom.size(); i++) {
-					MyRoom myRoom = madeMyRoom.elementAt(i);
+				for (int i = 0; i < madeRooms.size(); i++) {
+					MyRoom myRoom = madeRooms.elementAt(i);
 
 					if (myRoom.roomName.equals(from)) {
 						myRoom.roomBroadCast(msg);
@@ -193,21 +193,43 @@ public class Server implements CallBackService {
 				}
 
 			} else if (protocol.equals("SecretMsg")) {
-				
+
 				serverFrame.getMainBoard().append("[비밀 메세지]" + msg);
-				
+
 				for (int i = 0; i < connectedUsers.size(); i++) {
 					ConnectedUser user = connectedUsers.elementAt(i);
-					
-					if(user.id.equals(from)) {
+
+					if (user.id.equals(from)) {
 						user.sendMsg(msg);
 					}
 				}
-				
+
 			} else if (protocol.equals("MakeRoom")) {
+
+				for (int i = 0; i < madeRooms.size(); i++) {
+					MyRoom room = madeRooms.elementAt(i);
+
+					if (room.roomName.equals(from)) {
+						sendMsg("Fail/MakeRoom");
+
+					} else {
+						MyRoom myRoom = new MyRoom(from, this);
+						madeRooms.add(myRoom);
+
+						broadCast("NewRoom/" + from);
+						sendMsg("MakeRoom/" + from);
+					}
+				}
 
 			} else if (protocol.equals("OutRoom")) {
 
+				for (int i = 0; i < madeRooms.size(); i++) {
+					MyRoom myRoom = madeRooms.elementAt(i);
+
+					if (myRoom.roomName.equals(from)) {
+						madeRooms.remove(i);
+					}
+				}
 			}
 		}
 
@@ -244,6 +266,23 @@ public class Server implements CallBackService {
 
 		private void addUser(ConnectedUser connectedUser) {
 			myRoom.add(connectedUser);
+		}
+
+		private void removeRoom(ConnectedUser user) {
+			myRoom.remove(user);
+			boolean empty = madeRooms.isEmpty();
+			if (empty) {
+				for (int i = 0; i < madeRooms.size(); i++) {
+					MyRoom myRoom = madeRooms.elementAt(i);
+					
+					if(myRoom.roomName.equals(roomName)) {
+						madeRooms.remove(this);
+						broadCast("EmptyRoom/" + roomName);
+						break;
+					}
+				}
+			}
+
 		}
 
 	}
