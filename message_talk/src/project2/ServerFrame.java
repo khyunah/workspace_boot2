@@ -50,7 +50,7 @@ public class ServerFrame extends JFrame {
 
 		// 메인 패널
 		mainPanel = new JPanel();
-		mainBoard = new JTextArea(19, 30);
+		mainBoard = new JTextArea(19, 25);
 
 		// 포트패널
 		portPanel = new JPanel();

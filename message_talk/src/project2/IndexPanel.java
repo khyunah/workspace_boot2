@@ -126,16 +126,10 @@ public class IndexPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				String ip = inputIp.getText();
-				String port1 = inputPort.getText();
-				int port = Integer.parseInt(port1);
 				String id = inputId.getText();
 
-				callBackService.connectServer(ip, port, id);
-
-				inputIp.setText("");
-				inputPort.setText("");
-				inputId.setText("");
+				callBackService.connectServer(id);
+				
 			}
 		});
 	}

@@ -35,8 +35,8 @@ public class MessagePanel extends JPanel {
 		mainPanel = new JPanel();
 		bottomPanel = new JPanel();
 
-		mainMessageBox = new JTextArea("[ 채팅 ]\n", 25, 30);
-		writeMessageBox = new JTextArea(2, 23);
+		mainMessageBox = new JTextArea("[ 채팅 ]\n", 25, 25);
+		writeMessageBox = new JTextArea(2, 19);
 		sendMessageBtn = new JButton("전송");
 	}
 
