@@ -56,3 +56,23 @@ EnterRoom/현아방
 OutRoom/현아방
 OutRoom/현아방
 MakeRoom/ㄹㄹㄹㄹㄹ
+SecretMessage/김현아/안녕 현아
+SecretMessage/현아/안녕 ㅎㅎ
+SecretMessage/찬욱이12/찬욱이 
+MakeRoom/방이당
+EnterRoom/방이당
+Chatting/방이당/안녕
+Chatting/방이당/찬욱이는 안녕못해
+EnterRoom/방이당
+Chatting/방이당/아아아아
+MakeRoom/ㄴㄴㄴ
+Chatting/null/아
+Chatting/null/에
+Chatting/null/ㅎㅎㅎㅎ
+MakeRoom/11111
+EnterRoom/11111
+Chatting/11111/ㅎㅎㅎㅎ
+Chatting/11111/ㅋㅋㅋㅋㅋ
+Chatting/11111/ㅋㅋㅋ
+Chatting/11111/ㅋㅋㅋㅋㅋ
+Chatting/11111/ㅎㅎㅎㅎㅎ

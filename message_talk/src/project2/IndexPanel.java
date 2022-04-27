@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
@@ -22,7 +23,7 @@ import lombok.Data;
 
 @Data
 public class IndexPanel extends JPanel {
-	
+
 	private Image backgroundImage;
 	private JPanel backgroundPanel;
 
@@ -119,7 +120,7 @@ public class IndexPanel extends JPanel {
 		connectBtn.setBackground(Color.WHITE);
 		connectBtn.setBounds(30, 340, 120, 20);
 		borderPanel.add(connectBtn);
-		
+
 		// 테스트 코드
 		inputIp.setText("127.0.0.1");
 		inputPort.setText("10000");
@@ -130,10 +131,19 @@ public class IndexPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				String id = inputId.getText();
-				
-				callBackService.clickConnectServerBtn(id);
-				
+				if ((!inputIp.getText().equals("")) && (!inputPort.getText().equals(""))
+						&& (!inputId.getText().equals(""))) {
+					
+					String ip = inputIp.getText();
+					String stringPort = inputPort.getText();
+					int port = Integer.parseInt(stringPort);
+					String id = inputId.getText();
+					
+					callBackService.clickConnectServerBtn(ip, port, id);
+				} else {
+					JOptionPane.showMessageDialog(null, "입력한 정보를 확인하세요", "알림", JOptionPane.INFORMATION_MESSAGE);
+				}
+
 			}
 		});
 	}

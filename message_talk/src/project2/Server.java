@@ -14,15 +14,10 @@ import java.util.Calendar;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
-/**
- * 벡터 만들기
- * 
- * @author UserK
- *
- */
 public class Server {
 
 	// 접속된 유저 벡터
@@ -45,6 +40,8 @@ public class Server {
 	private String protocol;
 	private String from;
 	private String message;
+	
+	private ImageIcon icon = new ImageIcon("images/erroricon.png");
 
 	public Server() {
 		serverFrame = new ServerFrame(this);
@@ -64,7 +61,7 @@ public class Server {
 			connectClient();
 
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "이미 사용중인 포트입니다.", "알림", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "이미 사용중인 포트입니다.", "알림", JOptionPane.ERROR_MESSAGE, icon);
 			serverFrame.getConnectBtn().setEnabled(true);
 		}
 	}
@@ -153,8 +150,8 @@ public class Server {
 
 				sendInfomation();
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "입출력 소켓 설정 에러!", "알림", JOptionPane.ERROR_MESSAGE);
-				serverFrame.getMainBoard().append("[에러] 입출력 소켓 설정 에러 ! !\n");
+				JOptionPane.showMessageDialog(null, "서버 입출력 장치 에러!", "알림", JOptionPane.ERROR_MESSAGE, icon);
+				serverFrame.getMainBoard().append("[에러] 서버 입출력 장치 에러 ! !\n");
 			}
 		}
 
@@ -174,7 +171,7 @@ public class Server {
 				madeRoom();
 
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
 				serverFrame.getMainBoard().append("[에러] 접속 에러 ! !\n");
 			}
 		}
@@ -188,8 +185,8 @@ public class Server {
 					fileWriter(str);
 				}
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE);
-				serverFrame.getMainBoard().append("[에러] 접속 에러 ! !\n");
+				JOptionPane.showMessageDialog(null, "서버 입력 장치 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
+				serverFrame.getMainBoard().append("[에러] 서버 입력 장치 에러 ! !\n");
 			}
 		}
 
@@ -228,7 +225,7 @@ public class Server {
 				writer.write(str + "\n");
 				writer.flush();
 			} catch (IOException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "서버 출력 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
 			}
 		}
 

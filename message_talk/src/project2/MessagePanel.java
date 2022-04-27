@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.ScrollPane;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -26,6 +29,8 @@ public class MessagePanel extends JPanel {
 	private JPanel mainPanel;
 	private JPanel bottomPanel;
 
+	private ScrollPane scrollPane;
+
 	private JTextArea mainMessageBox;
 	private JTextField writeMessageBox;
 	private JButton sendMessageBtn;
@@ -47,7 +52,9 @@ public class MessagePanel extends JPanel {
 		mainPanel = new JPanel();
 		bottomPanel = new JPanel();
 
-		mainMessageBox = new JTextArea(20, 25);
+		scrollPane = new ScrollPane();
+
+		mainMessageBox = new JTextArea();
 		writeMessageBox = new JTextField(17);
 		sendMessageBtn = new JButton("전송");
 	}
@@ -63,14 +70,16 @@ public class MessagePanel extends JPanel {
 		mainMessageBox.setEnabled(false);
 		mainPanel.setBounds(40, 20, 300, 350);
 		mainPanel.setBorder(new TitledBorder(new LineBorder(Color.BLACK, 5), "Message"));
-		mainPanel.setBackground(new Color(0, 0, 0, 0));
-		mainPanel.add(mainMessageBox);
+		mainPanel.setBackground(Color.WHITE);
+		mainPanel.add(scrollPane);
+		scrollPane.setBounds(45, 15, 280, 310);
+		scrollPane.add(mainMessageBox);
 		add(mainPanel);
 
 		sendMessageBtn.setBackground(Color.WHITE);
 		sendMessageBtn.setPreferredSize(new Dimension(60, 20));
 		bottomPanel.setBounds(43, 380, 294, 35);
-		bottomPanel.setBackground(new Color(0, 0, 0, 0));
+		bottomPanel.setBackground(Color.WHITE);
 		bottomPanel.setBorder(new LineBorder(Color.BLACK, 2));
 		bottomPanel.add(writeMessageBox);
 		bottomPanel.add(sendMessageBtn);
@@ -81,11 +90,26 @@ public class MessagePanel extends JPanel {
 		sendMessageBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String msg = writeMessageBox.getText();
-				callBackService.clickSendMessageBtn(msg);
-				writeMessageBox.setText("");
+				sendMessage();
 			}
 		});
+
+		writeMessageBox.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					sendMessage();
+				}
+			}
+		});
+	}
+
+	private void sendMessage() {
+		if (!writeMessageBox.getText().equals("")) {
+			String msg = writeMessageBox.getText();
+			callBackService.clickSendMessageBtn(msg);
+			writeMessageBox.setText("");
+		}
 	}
 
 	@Override

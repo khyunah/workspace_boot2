@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -31,8 +32,8 @@ public class Client implements CallBackClientService, ProtocolImpl {
 	private BufferedWriter writer;
 
 	// 연결 주소
-	private String ip = "127.0.0.1";
-	private int port = 10000;
+	private String ip;
+	private int port;
 
 	// 유저 정보
 	private String id;
@@ -47,6 +48,8 @@ public class Client implements CallBackClientService, ProtocolImpl {
 	private Vector<String> userIdList = new Vector<>();
 	private Vector<String> roomNameList = new Vector<>();
 
+	private ImageIcon icon = new ImageIcon("images/erroricon.png");
+
 	public Client() {
 		clientFrame = new ClientFrame(this);
 		mainMessageBox = clientFrame.getMessagePanel().getMainMessageBox();
@@ -55,7 +58,9 @@ public class Client implements CallBackClientService, ProtocolImpl {
 	}
 
 	@Override
-	public void clickConnectServerBtn(String id) {
+	public void clickConnectServerBtn(String ip, int port, String id) {
+		this.ip = ip;
+		this.port = port;
 		this.id = id;
 		try {
 			connectNetwork();
@@ -65,8 +70,10 @@ public class Client implements CallBackClientService, ProtocolImpl {
 			writer.flush();
 			clientFrame.setTitle("[ KHA Talk_" + id + "님 ]");
 
+			clientFrame.getIndexPanel().getConnectBtn().setEnabled(false);
+
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
 		}
 	}
 
@@ -77,9 +84,9 @@ public class Client implements CallBackClientService, ProtocolImpl {
 			socket = new Socket(ip, port);
 
 		} catch (UnknownHostException e) {
-			JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
 		}
 	}
 
@@ -92,9 +99,9 @@ public class Client implements CallBackClientService, ProtocolImpl {
 
 			readThread();
 		} catch (UnknownHostException e) {
-			JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "클라이언트 입출력 장치 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "클라이언트 입출력 장치 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
 		}
 	}
 
@@ -109,7 +116,7 @@ public class Client implements CallBackClientService, ProtocolImpl {
 
 						checkProtocol(msg);
 					} catch (IOException e) {
-						JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "클라이언트 입력 장치 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
 						break;
 					}
 				}
@@ -122,7 +129,7 @@ public class Client implements CallBackClientService, ProtocolImpl {
 			writer.write(str + "\n");
 			writer.flush();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "클라이언트 출력 장치 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
 		}
 	}
 
@@ -164,7 +171,7 @@ public class Client implements CallBackClientService, ProtocolImpl {
 	}
 
 	/**
-	 * 프로토콜 구별 인터페이스 
+	 * 프로토콜 구별 인터페이스
 	 */
 	@Override
 	public void chatting() {
@@ -185,12 +192,18 @@ public class Client implements CallBackClientService, ProtocolImpl {
 	@Override
 	public void makeRoom() {
 		myRoomName = from;
+		clientFrame.getWaitingRoomPanel().getMakeRoomBtn().setEnabled(false);
+		clientFrame.getWaitingRoomPanel().getEnterRoomBtn().setEnabled(false);
 	}
 
 	@Override
 	public void madeRoom() {
-		roomNameList.add(from);
-		roomList.setListData(roomNameList);
+		if (!(roomNameList.size() == 0)) {
+			roomNameList.add(from);
+			roomList.setListData(roomNameList);
+			clientFrame.getWaitingRoomPanel().getEnterRoomBtn().setEnabled(false);
+			clientFrame.getWaitingRoomPanel().getOutRoomBtn().setEnabled(false);
+		}
 	}
 
 	@Override
@@ -204,11 +217,16 @@ public class Client implements CallBackClientService, ProtocolImpl {
 		roomNameList.remove(from);
 		roomList.setListData(roomNameList);
 		mainMessageBox.setText("");
+		clientFrame.getWaitingRoomPanel().getMakeRoomBtn().setEnabled(true);
+		clientFrame.getWaitingRoomPanel().getEnterRoomBtn().setEnabled(true);
+		clientFrame.getWaitingRoomPanel().getOutRoomBtn().setEnabled(false);
 	}
 
 	@Override
 	public void enterRoom() {
 		myRoomName = from;
+		clientFrame.getWaitingRoomPanel().getMakeRoomBtn().setEnabled(false);
+		clientFrame.getWaitingRoomPanel().getEnterRoomBtn().setEnabled(false);
 	}
 
 	@Override

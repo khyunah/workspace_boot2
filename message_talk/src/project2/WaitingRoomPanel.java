@@ -28,7 +28,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	private JPanel userListPanel;
 	private JPanel roomListPanel;
 	private JPanel roomBtnPanel;
-	private JPanel sendMagPanel;
+	private JPanel sendMessagePanel;
 
 	private JList<String> userList;
 	private JList<String> roomList;
@@ -42,8 +42,6 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 
 	private Vector<String> userIdVector = new Vector<>();
 	private Vector<String> roomNameVector = new Vector<>();
-
-	private String myRoomName;
 
 	private CallBackClientService callBackService;
 
@@ -61,7 +59,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		userListPanel = new JPanel();
 		roomListPanel = new JPanel();
 		roomBtnPanel = new JPanel();
-		sendMagPanel = new JPanel();
+		sendMessagePanel = new JPanel();
 
 		userList = new JList<>();
 		roomList = new JList<>();
@@ -71,7 +69,6 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		makeRoomBtn = new JButton("makeRoom");
 		outRoomBtn = new JButton("outRoom");
 		enterRoomBtn = new JButton("enterRoom");
-
 	}
 
 	private void initSetting() {
@@ -109,17 +106,17 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		roomBtnPanel.add(enterRoomBtn);
 		add(roomBtnPanel);
 
-		sendMagPanel.setBounds(50, 360, 300, 60);
-		sendMagPanel.setBackground(Color.WHITE);
-		sendMagPanel.setLayout(null);
-
-		inputSecretMsg.setBounds(30, 5, 240, 25);
+		inputSecretMsg.setBounds(30, 5, 240, 23);
 		secretMsgBtn.setBounds(30, 35, 240, 20);
 		secretMsgBtn.setBackground(Color.WHITE);
 
-		sendMagPanel.add(inputSecretMsg);
-		sendMagPanel.add(secretMsgBtn);
-		add(sendMagPanel);
+		sendMessagePanel.setBounds(50, 360, 300, 60);
+		sendMessagePanel.setBackground(Color.WHITE);
+//		sendMessagePanel.setBorder(new TitledBorder(new LineBorder(Color.BLACK, 2), "secret Message"));
+		sendMessagePanel.setLayout(null);
+		sendMessagePanel.add(inputSecretMsg);
+		sendMessagePanel.add(secretMsgBtn);
+		add(sendMessagePanel);
 	}
 
 	private void initListener() {

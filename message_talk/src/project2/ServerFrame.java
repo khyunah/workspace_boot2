@@ -3,6 +3,7 @@ package project2;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.ScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -22,6 +23,8 @@ import lombok.Data;
 public class ServerFrame extends JFrame {
 
 	private Server mContext;
+
+	private ScrollPane scrollPane;
 
 	// 백그라운드 패널
 	private BackgroundPanel backgroundPanel;
@@ -49,14 +52,16 @@ public class ServerFrame extends JFrame {
 
 		// 메인 패널
 		mainPanel = new JPanel();
-		mainBoard = new JTextArea(19, 25);
+		mainBoard = new JTextArea();
+
+		scrollPane = new ScrollPane();
 
 		// 포트패널
 		portPanel = new JPanel();
 		portLabel = new JLabel("PORT NUMBER");
 		inputPort = new JTextField(10);
 		connectBtn = new JButton("Connect");
-		
+
 		// 테스트 코드
 		inputPort.setText("10000");
 	}
@@ -87,7 +92,9 @@ public class ServerFrame extends JFrame {
 		mainPanel.setBackground(Color.WHITE);
 
 		mainBoard.setEnabled(false);
-		mainPanel.add(mainBoard);
+		mainPanel.add(scrollPane);
+		scrollPane.setBounds(45, 100, 300, 315);
+		scrollPane.add(mainBoard);
 		backgroundPanel.add(mainPanel);
 
 		setVisible(true);
