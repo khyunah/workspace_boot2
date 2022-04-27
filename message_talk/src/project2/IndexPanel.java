@@ -22,7 +22,7 @@ import lombok.Data;
 
 @Data
 public class IndexPanel extends JPanel {
-
+	
 	private Image backgroundImage;
 	private JPanel backgroundPanel;
 
@@ -42,9 +42,9 @@ public class IndexPanel extends JPanel {
 
 	private JButton connectBtn;
 
-	private CallBackService callBackService;
+	private CallBackClientService callBackService;
 
-	public IndexPanel(CallBackService callBackService) {
+	public IndexPanel(CallBackClientService callBackService) {
 		this.callBackService = callBackService;
 		initObject();
 		initSetting();
@@ -119,6 +119,10 @@ public class IndexPanel extends JPanel {
 		connectBtn.setBackground(Color.WHITE);
 		connectBtn.setBounds(30, 340, 120, 20);
 		borderPanel.add(connectBtn);
+		
+		// 테스트 코드
+		inputIp.setText("127.0.0.1");
+		inputPort.setText("10000");
 	}
 
 	private void initListener() {
@@ -127,8 +131,8 @@ public class IndexPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 
 				String id = inputId.getText();
-
-				callBackService.connectServer(id);
+				
+				callBackService.clickConnectServerBtn(id);
 				
 			}
 		});

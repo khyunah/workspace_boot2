@@ -21,6 +21,8 @@ import lombok.Data;
 @Data
 public class ServerFrame extends JFrame {
 
+	private Server mContext;
+
 	// 백그라운드 패널
 	private BackgroundPanel backgroundPanel;
 
@@ -34,11 +36,8 @@ public class ServerFrame extends JFrame {
 	private JTextField inputPort;
 	private JButton connectBtn;
 
-	// 인터페이스 기능
-	private CallBackService callBackService;
-
-	public ServerFrame(CallBackService callBackService) {
-		this.callBackService = callBackService;
+	public ServerFrame(Server mContext) {
+		this.mContext = mContext;
 		initObject();
 		initSetting();
 		initListener();
@@ -57,6 +56,9 @@ public class ServerFrame extends JFrame {
 		portLabel = new JLabel("PORT NUMBER");
 		inputPort = new JTextField(10);
 		connectBtn = new JButton("Connect");
+		
+		// 테스트 코드
+		inputPort.setText("10000");
 	}
 
 	private void initSetting() {
@@ -95,7 +97,7 @@ public class ServerFrame extends JFrame {
 		connectBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				callBackService.startServer();
+				mContext.startServer();
 			}
 		});
 	}

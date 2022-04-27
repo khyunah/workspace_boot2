@@ -28,9 +28,9 @@ public class ClientFrame extends JFrame implements ActionListener {
 	private MessagePanel messagePanel;
 
 	// 기능 인터페이스
-	private CallBackService callBackService;
+	private CallBackClientService callBackService;
 
-	public ClientFrame(CallBackService callBackService) {
+	public ClientFrame(CallBackClientService callBackService) {
 		this.callBackService = callBackService;
 		initObject();
 		initSetting();

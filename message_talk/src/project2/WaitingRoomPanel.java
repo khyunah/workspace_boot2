@@ -1,29 +1,34 @@
 package project2;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import lombok.Data;
 
 @Data
 public class WaitingRoomPanel extends JPanel implements ActionListener {
 
+	private Image backgroundImage;
+	private JPanel backgroundPanel;
+
 	private JPanel userListPanel;
 	private JPanel roomListPanel;
 	private JPanel roomBtnPanel;
 	private JPanel sendMagPanel;
-
-	private JLabel userListLabel;
-	private JLabel roomListLabel;
 
 	private JList<String> userList;
 	private JList<String> roomList;
@@ -33,15 +38,16 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 
 	private JButton makeRoomBtn;
 	private JButton outRoomBtn;
+	private JButton enterRoomBtn;
 
 	private Vector<String> userIdVector = new Vector<>();
 	private Vector<String> roomNameVector = new Vector<>();
-	
+
 	private String myRoomName;
 
-	private CallBackService callBackService;
-	
-	public WaitingRoomPanel(CallBackService callBackService) {
+	private CallBackClientService callBackService;
+
+	public WaitingRoomPanel(CallBackClientService callBackService) {
 		this.callBackService = callBackService;
 		initObject();
 		initSetting();
@@ -49,22 +55,23 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	}
 
 	private void initObject() {
+		backgroundImage = new ImageIcon("images/background.png").getImage();
+		backgroundPanel = new JPanel();
+
 		userListPanel = new JPanel();
 		roomListPanel = new JPanel();
 		roomBtnPanel = new JPanel();
 		sendMagPanel = new JPanel();
-
-		userListLabel = new JLabel("User List\n");
-		roomListLabel = new JLabel("Room List\n");
 
 		userList = new JList<>();
 		roomList = new JList<>();
 
 		inputSecretMsg = new JTextField();
 		secretMsgBtn = new JButton("send Message");
-		makeRoomBtn = new JButton("make Room");
-		outRoomBtn = new JButton("out Room");
-		
+		makeRoomBtn = new JButton("makeRoom");
+		outRoomBtn = new JButton("outRoom");
+		enterRoomBtn = new JButton("enterRoom");
+
 	}
 
 	private void initSetting() {
@@ -73,13 +80,14 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 
 		userListPanel.setBounds(50, 30, 120, 260);
 		userListPanel.setBackground(Color.WHITE);
-		userListPanel.add(userListLabel);
+		userListPanel.setBorder(new TitledBorder(new LineBorder(Color.BLACK,3),"user List"));
+
 		userListPanel.add(userList);
 		add(userListPanel);
 
 		roomListPanel.setBounds(230, 30, 120, 260);
 		roomListPanel.setBackground(Color.WHITE);
-		roomListPanel.add(roomListLabel);
+		roomListPanel.setBorder(new TitledBorder(new LineBorder(Color.BLACK,3),"room List"));
 		roomListPanel.add(roomList);
 		add(roomListPanel);
 
@@ -88,13 +96,17 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		roomBtnPanel.setLayout(null);
 
 		makeRoomBtn.setBackground(Color.WHITE);
-		makeRoomBtn.setBounds(30, 5, 110, 25);
+		makeRoomBtn.setBounds(0, 5, 100, 25);
 
 		outRoomBtn.setBackground(Color.WHITE);
-		outRoomBtn.setBounds(170, 5, 100, 25);
+		outRoomBtn.setBounds(108, 5, 85, 25);
+
+		enterRoomBtn.setBackground(Color.WHITE);
+		enterRoomBtn.setBounds(200, 5, 100, 25);
 
 		roomBtnPanel.add(makeRoomBtn);
 		roomBtnPanel.add(outRoomBtn);
+		roomBtnPanel.add(enterRoomBtn);
 		add(roomBtnPanel);
 
 		sendMagPanel.setBounds(50, 360, 300, 60);
@@ -114,27 +126,39 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		makeRoomBtn.addActionListener(this);
 		outRoomBtn.addActionListener(this);
 		secretMsgBtn.addActionListener(this);
+		enterRoomBtn.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == secretMsgBtn) {
-			
+
 			String msg = inputSecretMsg.getText();
 			inputSecretMsg.setText("");
-			callBackService.sendSecretMessage(msg);
-			
+			callBackService.clickSendSecretMessageBtn(msg);
+			userList.setSelectedValue(null, false);
+
 		} else if (e.getSource() == makeRoomBtn) {
-			
+
 			String roomName = JOptionPane.showInputDialog("[ 방 이름 설정 ]");
-			
+
 			if (roomName != null) {
-				callBackService.makeRoom(roomName);
+				callBackService.clickMakeRoomBtn(roomName);
 			}
-			
+
 		} else if (e.getSource() == outRoomBtn) {
-			callBackService.outRoom();
+			String roomName = roomList.getSelectedValue();
+			callBackService.clickOutRoomBtn(roomName);
+		} else if (e.getSource() == enterRoomBtn) {
+			callBackService.clickEnterRoomBtn();
+			roomList.setSelectedValue(null, false);
 		}
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
 	}
 }
