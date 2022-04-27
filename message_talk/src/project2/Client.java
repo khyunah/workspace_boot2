@@ -186,7 +186,7 @@ public class Client implements CallBackClientService, ProtocolImpl {
 
 	@Override
 	public void secretMessage() {
-		JOptionPane.showMessageDialog(null, from + "님의 메세지\n" + message, "[비밀메세지]", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(null, from + "님의 메세지\n\"" + message + "\"", "[비밀메세지]", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	@Override
