@@ -1,8 +1,5 @@
 package project2;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -11,12 +8,10 @@ import javax.swing.border.EmptyBorder;
 import lombok.Data;
 
 @Data
-public class ClientFrame extends JFrame implements ActionListener {
-
-	private String name;
+public class ClientFrame extends JFrame {
 
 	private JTabbedPane tabPane;
-	private JPanel panel;
+	private JPanel mainPanel;
 
 	// 로그인 창
 	private IndexPanel indexPanel;
@@ -34,7 +29,6 @@ public class ClientFrame extends JFrame implements ActionListener {
 		this.callBackService = callBackService;
 		initObject();
 		initSetting();
-		initListener();
 	}
 
 	private void initObject() {
@@ -42,7 +36,7 @@ public class ClientFrame extends JFrame implements ActionListener {
 		waitingRoomPanel = new WaitingRoomPanel(callBackService);
 		messagePanel = new MessagePanel(callBackService);
 		tabPane = new JTabbedPane(JTabbedPane.TOP);
-		panel = new JPanel();
+		mainPanel = new JPanel();
 	}
 
 	private void initSetting() {
@@ -51,12 +45,12 @@ public class ClientFrame extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setLayout(null);
-		setContentPane(panel);
+		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		mainPanel.setLayout(null);
+		setContentPane(mainPanel);
 
 		tabPane.setBounds(0, 0, getWidth(), getHeight());
-		panel.add(tabPane);
+		mainPanel.add(tabPane);
 
 		indexPanel.setLayout(null);
 		tabPane.addTab("로그인", null, indexPanel, null);
@@ -66,14 +60,5 @@ public class ClientFrame extends JFrame implements ActionListener {
 		tabPane.addTab("채팅", null, messagePanel, null);
 
 		setVisible(true);
-	}
-
-	private void initListener() {
-
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
 	}
 }

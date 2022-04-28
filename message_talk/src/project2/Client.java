@@ -21,6 +21,7 @@ public class Client implements CallBackClientService, ProtocolImpl {
 	// 프레임 창
 	private ClientFrame clientFrame;
 
+	// Client의 화면 부분의 컴포넌트를 멤버변수로 가져와 담을 변수
 	private JTextArea mainMessageBox;
 	private JList<String> userList;
 	private JList<String> roomList;
@@ -45,19 +46,21 @@ public class Client implements CallBackClientService, ProtocolImpl {
 	private String id;
 	private String myRoomName;
 
-	// 토크나이저
+	// 토크나이저 사용 변수
 	private String protocol;
 	private String from;
 	private String message;
 
-	// 사용자 이름, 룸이름 벡터 만들기
+	// 접속자 명단(userList), 방 명단(roomList)을 업데이트 하기 위한 문자열 벡터
 	private Vector<String> userIdList = new Vector<>();
 	private Vector<String> roomNameList = new Vector<>();
 
+	// JOptionPane 사용할때 알림창의 아이콘 변경할 ImageIcon
 	private ImageIcon icon = new ImageIcon("images/erroricon.png");
 
 	public Client() {
 		clientFrame = new ClientFrame(this);
+		// Client의 화면 부분의 컴포넌트 가져오기
 		mainMessageBox = clientFrame.getMessagePanel().getMainMessageBox();
 		userList = clientFrame.getWaitingRoomPanel().getUserList();
 		roomList = clientFrame.getWaitingRoomPanel().getRoomList();
@@ -68,6 +71,11 @@ public class Client implements CallBackClientService, ProtocolImpl {
 		sendMessageBtn = clientFrame.getMessagePanel().getSendMessageBtn();
 	}
 
+	/**
+	 * ConnectServerBtn을 눌렸을때 실행된다.<br>
+	 * 소켓연결 하는 connectNetwork(), 입출력 장치를 연결하는 connectIO() 호출 <br>
+	 * id를 서버로 보내고, 화면 부분의 제목을 변경하고, 버튼을 활성화한다.<br>
+	 */
 	@Override
 	public void clickConnectServerBtn(String ip, int port, String id) {
 		this.ip = ip;
@@ -92,10 +100,12 @@ public class Client implements CallBackClientService, ProtocolImpl {
 		}
 	}
 
+	/**
+	 * 소켓 장치 연결
+	 */
 	private void connectNetwork() {
 		try {
 
-			// 소켓 장치
 			socket = new Socket(ip, port);
 
 		} catch (UnknownHostException e) {
@@ -105,13 +115,16 @@ public class Client implements CallBackClientService, ProtocolImpl {
 		}
 	}
 
+	/**
+	 * 입출력 장치 연결한 후, readThread()를 호출한다.<br>
+	 */
 	private void connectIO() {
 		try {
-
 			// 입출력 장치
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
+			// 입력 스레드
 			readThread();
 		} catch (UnknownHostException e) {
 			JOptionPane.showMessageDialog(null, "클라이언트 입출력 장치 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
@@ -120,6 +133,10 @@ public class Client implements CallBackClientService, ProtocolImpl {
 		}
 	}
 
+	/**
+	 * 서버측의 요청을 받아올 Reader<br>
+	 * 요청을 받아 msg에 저장하고, checkProtocol()호출 한다.<br>
+	 */
 	private void readThread() {
 		new Thread(new Runnable() {
 
@@ -139,6 +156,12 @@ public class Client implements CallBackClientService, ProtocolImpl {
 		}).start();
 	}
 
+	/**
+	 * 클라이언트 측에서 서버측으로 보내는 Writer<br>
+	 * 서버측에서 readLine()으로 읽기 때문에, "\n" 엔터가 필요함.<br>
+	 * 
+	 * @param str
+	 */
 	private void writer(String str) {
 		try {
 			writer.write(str + "\n");
@@ -148,6 +171,15 @@ public class Client implements CallBackClientService, ProtocolImpl {
 		}
 	}
 
+	/**
+	 * 서버측에서 읽어온 요청을 프로토콜 별로 구별해서 해당 메소드를 호출한다.<br>
+	 * 요청이 문자열로 넘어오고 / 슬러시를 기준으로 문자열을 나눈다.<br>
+	 * protocol ㅡ> 어떤 작업을 해야하는지 알려주는 약속.<br>
+	 * from ㅡ> 보내는 측이 담겨 있다.<br>
+	 * message ㅡ> 보내고자 하는 메세지를 담는다.<br>
+	 * 
+	 * @param msg
+	 */
 	private void checkProtocol(String msg) {
 		StringTokenizer tokenizer = new StringTokenizer(msg, "/");
 
@@ -189,13 +221,14 @@ public class Client implements CallBackClientService, ProtocolImpl {
 			enterRoomBtn.setEnabled(true);
 			outRoomBtn.setEnabled(false);
 		} else if (protocol.equals("FailMakeRoom")) {
-			JOptionPane.showMessageDialog(null, from + "님의 메세지\n\"" + message + "\"", "[비밀메세지]",
+			JOptionPane.showMessageDialog(null, "같은 이름의 방이 존재합니다 !", "[알림]",
 					JOptionPane.ERROR_MESSAGE, icon);
 		}
 	}
 
 	/**
-	 * 프로토콜 구별 인터페이스
+	 * 프로토콜 인터페이스<br>
+	 * 
 	 */
 	@Override
 	public void chatting() {

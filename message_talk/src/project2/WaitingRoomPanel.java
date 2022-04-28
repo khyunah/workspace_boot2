@@ -136,7 +136,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		if (e.getSource() == secretMsgBtn) {
 
 			String msg = inputSecretMsg.getText();
-			if(msg != null) {
+			if(msg.equals(null)) {
 				callBackService.clickSendSecretMessageBtn(msg);
 				inputSecretMsg.setText("");
 				userList.setSelectedValue(null, false);
@@ -146,7 +146,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 
 			String roomName = JOptionPane.showInputDialog("[ 방 이름 설정 ]");
 
-			if (roomName != null) {
+			if (roomName.equals(null)) {
 				callBackService.clickMakeRoomBtn(roomName);
 			}
 
@@ -154,6 +154,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 
 			String roomName = roomList.getSelectedValue();
 			callBackService.clickOutRoomBtn(roomName);
+			roomList.setSelectedValue(null, false);
 
 		} else if (e.getSource() == enterRoomBtn) {
 

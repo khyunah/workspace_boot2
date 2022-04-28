@@ -23,19 +23,24 @@ import lombok.Data;
 @Data
 public class MessagePanel extends JPanel {
 
+	// 백그라운드 이미지 컴포넌트
 	private Image backgroundImage;
 	private JPanel backgroundPanel;
 
+	// 패널
 	private JPanel mainPanel;
 	private JPanel bottomPanel;
 
+	// 스크롤
 	private ScrollPane scrollPane;
 
+	// 텍스트 컴포넌트
 	private JTextArea mainMessageBox;
 	private JTextField writeMessageBox;
+
+	// 메세지 보내기 버튼
 	private JButton sendMessageBtn;
 
-	private String messageText;
 	private CallBackClientService callBackService;
 
 	public MessagePanel(CallBackClientService callBackService) {
@@ -106,10 +111,11 @@ public class MessagePanel extends JPanel {
 	}
 
 	private void sendMessage() {
-		if (!writeMessageBox.getText().equals("")) {
+		if (!writeMessageBox.getText().equals(null)) {
 			String msg = writeMessageBox.getText();
 			callBackService.clickSendMessageBtn(msg);
 			writeMessageBox.setText("");
+			writeMessageBox.requestFocus();
 		}
 	}
 

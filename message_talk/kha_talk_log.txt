@@ -146,3 +146,8 @@ Chatting/ㅂㅂㅂㅂ/ㅎㅎㅎ
 OutRoom/ㅂㅂㅂㅂ
 MakeRoom/ㅎㅎ
 Chatting/ㅎㅎ/ㅎㅎㅎㅎㅎ
+MakeRoom/dddd
+EnterRoom/dddd
+OutRoom/dddd
+MakeRoom/sssss
+OutRoom/null

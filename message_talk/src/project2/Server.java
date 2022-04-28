@@ -40,7 +40,7 @@ public class Server {
 	private String protocol;
 	private String from;
 	private String message;
-	
+
 	private ImageIcon icon = new ImageIcon("images/erroricon.png");
 
 	public Server() {
@@ -56,7 +56,7 @@ public class Server {
 		try {
 			// 서버 소켓 장치
 			serverSocket = new ServerSocket(10000);
-			serverFrame.getMainBoard().append("[알림] 서버 시작\n");
+			mainBoard.append("[알림] 서버 시작\n");
 			serverFrame.getConnectBtn().setEnabled(false);
 			connectClient();
 
@@ -67,7 +67,7 @@ public class Server {
 	}
 
 	/**
-	 * 서버 대기하여 소켓 연결을 하고, 스레드 만들기
+	 * 서버 대기하여 소켓 연결을 하고, 스레드 실행<br>
 	 */
 	private void connectClient() {
 		new Thread(new Runnable() {
@@ -86,7 +86,7 @@ public class Server {
 						user.start();
 					} catch (IOException e) {
 						// 서버 중지
-						serverFrame.getMainBoard().append("[에러] 서버 중지 ! !\n");
+						mainBoard.append("[에러] 서버 중지 ! !\n");
 						break;
 					}
 				}
@@ -106,6 +106,12 @@ public class Server {
 		}
 	}
 
+	/**
+	 * 소켓이 연결이 되면 ConnectedUser클래스가 생성이 된다.
+	 * 
+	 * @author 김현아
+	 *
+	 */
 	private class ConnectedUser extends Thread implements ProtocolImpl {
 		// 소켓 장치
 		private Socket socket;
@@ -117,7 +123,7 @@ public class Server {
 		// 파일 저장을 위한 장치
 		private FileWriter fileWriter;
 
-		//
+		// 유저 정보
 		private String id;
 		private String myRoomName;
 
@@ -126,6 +132,11 @@ public class Server {
 			connectIO();
 		}
 
+		/**
+		 * 서버로 들어오는 요청은 모두 저장되는 파일 Writer.<br>
+		 * 
+		 * @param str
+		 */
 		private void fileWriter(String str) {
 			try {
 				fileWriter = new FileWriter("kha_talk_log.txt", true);
@@ -140,7 +151,7 @@ public class Server {
 		}
 
 		/**
-		 * 유저가 아이디까지 입력하고 연결이 되면, 입출력 장치 소켓 연결.
+		 * 입출력 장치 연결<br>
 		 */
 		private void connectIO() {
 			try {
@@ -155,6 +166,10 @@ public class Server {
 			}
 		}
 
+		/**
+		 * 처음 유저가 로그인 되었을때 화면 부분의 명단 업데이트와<br>
+		 * 접속되어 있는 유저들에게 새로운 유저(로그인 한 새로운 유저 )를 알리기<br>
+		 */
 		private void sendInfomation() {
 			try {
 				// 유저의 아이디를 가지고 온다.
@@ -191,7 +206,7 @@ public class Server {
 		}
 
 		/**
-		 * 프로토콜 별 출력
+		 * 프로토콜을 구별해서 해당 메소드 호출 <br>
 		 * 
 		 * @param str
 		 */
@@ -220,6 +235,11 @@ public class Server {
 			}
 		}
 
+		/**
+		 * 클라이언트측으로 보내는 응답<br>
+		 * 
+		 * @param str
+		 */
 		private void writer(String str) {
 			try {
 				writer.write(str + "\n");
@@ -229,6 +249,9 @@ public class Server {
 			}
 		}
 
+		/**
+		 * 프로토콜 인터페이스 <br>
+		 */
 		@Override
 		public void chatting() {
 			mainBoard.append("[메세지] " + from + "_" + message + "\n");
@@ -270,6 +293,7 @@ public class Server {
 			}
 
 			if (roomCheck) {
+				myRoomName = from;
 				MyRoom myRoom = new MyRoom(from, this);
 				madeRooms.add(myRoom);
 				mainBoard.append("[방 생성]" + id + "_" + from + "\n");
@@ -290,6 +314,7 @@ public class Server {
 				MyRoom myRoom = madeRooms.elementAt(i);
 
 				if (myRoom.roomName.equals(from)) {
+					myRoomName = null;
 					myRoom.roomBroadCast("Chatting/퇴장/" + id + "님 퇴장");
 					mainBoard.append("[방 퇴장]" + id + "_" + from + "\n");
 					myRoom.removeRoom(this);
@@ -304,6 +329,7 @@ public class Server {
 				MyRoom myRoom = madeRooms.elementAt(i);
 
 				if (myRoom.roomName.equals(from)) {
+					myRoomName = from;
 					myRoom.addUser(this);
 					myRoom.roomBroadCast("Chatting/입장/" + id + "님 입장");
 					serverFrame.getMainBoard().append("[입장]" + from + " 방_" + id + "\n");
@@ -326,7 +352,7 @@ public class Server {
 				writer("ConnectedUser/" + user.id);
 			}
 		}
-		
+
 		@Override
 		public void madeRoom() {
 			for (int i = 0; i < madeRooms.size(); i++) {
@@ -336,20 +362,22 @@ public class Server {
 		}
 	}
 
+	/**
+	 * 방만들기를 했을때 생성되는 MyRoom클래스<br>
+	 * 
+	 * @author 김현아
+	 *
+	 */
 	private class MyRoom {
 
 		private String roomName;
+		// myRoom에 들어온 사람들의 정보가 담김.
 		private Vector<ConnectedUser> myRoom = new Vector<>();
 
 		public MyRoom(String roomName, ConnectedUser connectedUser) {
 			this.roomName = roomName;
 			this.myRoom.add(connectedUser);
 			connectedUser.myRoomName = roomName;
-		}
-
-		@Override
-		public String toString() {
-			return roomName;
 		}
 
 		/**
@@ -365,7 +393,6 @@ public class Server {
 
 		private void addUser(ConnectedUser connectedUser) {
 			myRoom.add(connectedUser);
-			System.out.println("방에 유저 추가됨");
 		}
 
 		private void removeRoom(ConnectedUser user) {
