@@ -77,14 +77,14 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 
 		userListPanel.setBounds(50, 30, 120, 260);
 		userListPanel.setBackground(Color.WHITE);
-		userListPanel.setBorder(new TitledBorder(new LineBorder(Color.BLACK,3),"user List"));
+		userListPanel.setBorder(new TitledBorder(new LineBorder(Color.BLACK, 3), "user List"));
 
 		userListPanel.add(userList);
 		add(userListPanel);
 
 		roomListPanel.setBounds(230, 30, 120, 260);
 		roomListPanel.setBackground(Color.WHITE);
-		roomListPanel.setBorder(new TitledBorder(new LineBorder(Color.BLACK,3),"room List"));
+		roomListPanel.setBorder(new TitledBorder(new LineBorder(Color.BLACK, 3), "room List"));
 		roomListPanel.add(roomList);
 		add(roomListPanel);
 
@@ -94,12 +94,15 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 
 		makeRoomBtn.setBackground(Color.WHITE);
 		makeRoomBtn.setBounds(0, 5, 100, 25);
+		makeRoomBtn.setEnabled(false);
 
 		outRoomBtn.setBackground(Color.WHITE);
 		outRoomBtn.setBounds(108, 5, 85, 25);
+		outRoomBtn.setEnabled(false);
 
 		enterRoomBtn.setBackground(Color.WHITE);
 		enterRoomBtn.setBounds(200, 5, 100, 25);
+		enterRoomBtn.setEnabled(false);
 
 		roomBtnPanel.add(makeRoomBtn);
 		roomBtnPanel.add(outRoomBtn);
@@ -109,6 +112,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		inputSecretMsg.setBounds(30, 5, 240, 23);
 		secretMsgBtn.setBounds(30, 35, 240, 20);
 		secretMsgBtn.setBackground(Color.WHITE);
+		secretMsgBtn.setEnabled(false);
 
 		sendMessagePanel.setBounds(50, 360, 300, 60);
 		sendMessagePanel.setBackground(Color.WHITE);
@@ -132,9 +136,11 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		if (e.getSource() == secretMsgBtn) {
 
 			String msg = inputSecretMsg.getText();
-			inputSecretMsg.setText("");
-			callBackService.clickSendSecretMessageBtn(msg);
-			userList.setSelectedValue(null, false);
+			if(msg != null) {
+				callBackService.clickSendSecretMessageBtn(msg);
+				inputSecretMsg.setText("");
+				userList.setSelectedValue(null, false);
+			}
 
 		} else if (e.getSource() == makeRoomBtn) {
 
@@ -145,10 +151,14 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 			}
 
 		} else if (e.getSource() == outRoomBtn) {
+
 			String roomName = roomList.getSelectedValue();
 			callBackService.clickOutRoomBtn(roomName);
+
 		} else if (e.getSource() == enterRoomBtn) {
-			callBackService.clickEnterRoomBtn();
+
+			String roomName = roomList.getSelectedValue();
+			callBackService.clickEnterRoomBtn(roomName);
 			roomList.setSelectedValue(null, false);
 		}
 	}

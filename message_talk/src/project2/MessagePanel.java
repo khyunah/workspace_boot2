@@ -78,6 +78,7 @@ public class MessagePanel extends JPanel {
 
 		sendMessageBtn.setBackground(Color.WHITE);
 		sendMessageBtn.setPreferredSize(new Dimension(60, 20));
+		sendMessageBtn.setEnabled(false);
 		bottomPanel.setBounds(43, 380, 294, 35);
 		bottomPanel.setBackground(Color.WHITE);
 		bottomPanel.setBorder(new LineBorder(Color.BLACK, 2));

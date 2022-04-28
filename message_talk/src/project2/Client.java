@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -23,6 +24,11 @@ public class Client implements CallBackClientService, ProtocolImpl {
 	private JTextArea mainMessageBox;
 	private JList<String> userList;
 	private JList<String> roomList;
+	private JButton enterRoomBtn;
+	private JButton makeRoomBtn;
+	private JButton outRoomBtn;
+	private JButton secretMsgBtn;
+	private JButton sendMessageBtn;
 
 	// 소켓 장치
 	private Socket socket;
@@ -55,6 +61,11 @@ public class Client implements CallBackClientService, ProtocolImpl {
 		mainMessageBox = clientFrame.getMessagePanel().getMainMessageBox();
 		userList = clientFrame.getWaitingRoomPanel().getUserList();
 		roomList = clientFrame.getWaitingRoomPanel().getRoomList();
+		enterRoomBtn = clientFrame.getWaitingRoomPanel().getEnterRoomBtn();
+		makeRoomBtn = clientFrame.getWaitingRoomPanel().getMakeRoomBtn();
+		outRoomBtn = clientFrame.getWaitingRoomPanel().getOutRoomBtn();
+		secretMsgBtn = clientFrame.getWaitingRoomPanel().getSecretMsgBtn();
+		sendMessageBtn = clientFrame.getMessagePanel().getSendMessageBtn();
 	}
 
 	@Override
@@ -71,6 +82,10 @@ public class Client implements CallBackClientService, ProtocolImpl {
 			clientFrame.setTitle("[ KHA Talk_" + id + "님 ]");
 
 			clientFrame.getIndexPanel().getConnectBtn().setEnabled(false);
+			makeRoomBtn.setEnabled(true);
+			enterRoomBtn.setEnabled(true);
+			secretMsgBtn.setEnabled(true);
+			sendMessageBtn.setEnabled(true);
 
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
@@ -167,6 +182,15 @@ public class Client implements CallBackClientService, ProtocolImpl {
 
 		} else if (protocol.equals("ConnectedUser")) {
 			connectedUser();
+		} else if (protocol.equals("EmptyRoom")) {
+			roomNameList.remove(from);
+			roomList.setListData(roomNameList);
+			makeRoomBtn.setEnabled(true);
+			enterRoomBtn.setEnabled(true);
+			outRoomBtn.setEnabled(false);
+		} else if (protocol.equals("FailMakeRoom")) {
+			JOptionPane.showMessageDialog(null, from + "님의 메세지\n\"" + message + "\"", "[비밀메세지]",
+					JOptionPane.ERROR_MESSAGE, icon);
 		}
 	}
 
@@ -179,6 +203,8 @@ public class Client implements CallBackClientService, ProtocolImpl {
 			mainMessageBox.append("[나] \n" + message + "\n");
 		} else if (from.equals("입장")) {
 			mainMessageBox.append("▶" + from + "◀" + message + "\n");
+		} else if (from.equals("퇴장")) {
+			mainMessageBox.append("▷" + from + "◁" + message + "\n");
 		} else {
 			mainMessageBox.append("[" + from + "] \n" + message + "\n");
 		}
@@ -192,17 +218,16 @@ public class Client implements CallBackClientService, ProtocolImpl {
 	@Override
 	public void makeRoom() {
 		myRoomName = from;
-		clientFrame.getWaitingRoomPanel().getMakeRoomBtn().setEnabled(false);
-		clientFrame.getWaitingRoomPanel().getEnterRoomBtn().setEnabled(false);
+		makeRoomBtn.setEnabled(false);
+		enterRoomBtn.setEnabled(false);
+		outRoomBtn.setEnabled(true);
 	}
 
 	@Override
 	public void madeRoom() {
+		roomNameList.add(from);
 		if (!(roomNameList.size() == 0)) {
-			roomNameList.add(from);
 			roomList.setListData(roomNameList);
-			clientFrame.getWaitingRoomPanel().getEnterRoomBtn().setEnabled(false);
-			clientFrame.getWaitingRoomPanel().getOutRoomBtn().setEnabled(false);
 		}
 	}
 
@@ -214,19 +239,19 @@ public class Client implements CallBackClientService, ProtocolImpl {
 
 	@Override
 	public void outRoom() {
-		roomNameList.remove(from);
-		roomList.setListData(roomNameList);
+		myRoomName = null;
 		mainMessageBox.setText("");
-		clientFrame.getWaitingRoomPanel().getMakeRoomBtn().setEnabled(true);
-		clientFrame.getWaitingRoomPanel().getEnterRoomBtn().setEnabled(true);
-		clientFrame.getWaitingRoomPanel().getOutRoomBtn().setEnabled(false);
+		makeRoomBtn.setEnabled(true);
+		enterRoomBtn.setEnabled(true);
+		outRoomBtn.setEnabled(false);
 	}
 
 	@Override
 	public void enterRoom() {
 		myRoomName = from;
-		clientFrame.getWaitingRoomPanel().getMakeRoomBtn().setEnabled(false);
-		clientFrame.getWaitingRoomPanel().getEnterRoomBtn().setEnabled(false);
+		makeRoomBtn.setEnabled(false);
+		enterRoomBtn.setEnabled(false);
+		outRoomBtn.setEnabled(true);
 	}
 
 	@Override
@@ -269,9 +294,8 @@ public class Client implements CallBackClientService, ProtocolImpl {
 	}
 
 	@Override
-	public void clickEnterRoomBtn() {
-		String room = (String) clientFrame.getWaitingRoomPanel().getRoomList().getSelectedValue();
-		writer("EnterRoom/" + room);
+	public void clickEnterRoomBtn(String roomName) {
+		writer("EnterRoom/" + roomName);
 	}
 
 	public static void main(String[] args) {

@@ -261,7 +261,7 @@ public class Server {
 				MyRoom room = madeRooms.elementAt(i);
 
 				if (room.roomName.equals(from)) {
-					writer("Fail/MakeRoom");
+					writer("FailMakeRoom/" + from);
 					mainBoard.append("[방 생성 실패]" + id + "_" + from + "\n");
 					roomCheck = false;
 				} else {
@@ -273,7 +273,6 @@ public class Server {
 				MyRoom myRoom = new MyRoom(from, this);
 				madeRooms.add(myRoom);
 				mainBoard.append("[방 생성]" + id + "_" + from + "\n");
-				System.out.println("방을 생성하였습니다");
 
 				newRoom();
 				writer("MakeRoom/" + from);
@@ -291,9 +290,10 @@ public class Server {
 				MyRoom myRoom = madeRooms.elementAt(i);
 
 				if (myRoom.roomName.equals(from)) {
+					myRoom.roomBroadCast("Chatting/퇴장/" + id + "님 퇴장");
+					mainBoard.append("[방 퇴장]" + id + "_" + from + "\n");
 					myRoom.removeRoom(this);
-					mainBoard.append("[방 삭제]" + id + "_" + from + "\n");
-					writer("OutRoom/" + from + "\n");
+					writer("OutRoom/" + from);
 				}
 			}
 		}
@@ -305,7 +305,7 @@ public class Server {
 
 				if (myRoom.roomName.equals(from)) {
 					myRoom.addUser(this);
-					myRoom.roomBroadCast("Chatting/알림/" + id + "님 입장");
+					myRoom.roomBroadCast("Chatting/입장/" + id + "님 입장");
 					serverFrame.getMainBoard().append("[입장]" + from + " 방_" + id + "\n");
 					writer("EnterRoom/" + from);
 				}
@@ -377,7 +377,9 @@ public class Server {
 
 					if (myRoom.roomName.equals(roomName)) {
 						madeRooms.remove(this);
-						broadCast("EmptyRoom/" + roomName);
+						mainBoard.append("[방 삭제]" + user.id + "_" + from + "\n");
+						roomBroadCast("OutRoom/" + from);
+						broadCast("EmptyRoom/" + from);
 						break;
 					}
 				}

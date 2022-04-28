@@ -56,15 +56,6 @@ EnterRoom/현아방
 OutRoom/현아방
 OutRoom/현아방
 MakeRoom/ㄹㄹㄹㄹㄹ
-SecretMessage/김현아/안녕 현아
-SecretMessage/현아/안녕 ㅎㅎ
-SecretMessage/찬욱이12/찬욱이 
-MakeRoom/방이당
-EnterRoom/방이당
-Chatting/방이당/안녕
-Chatting/방이당/찬욱이는 안녕못해
-EnterRoom/방이당
-Chatting/방이당/아아아아
 MakeRoom/ㄴㄴㄴ
 Chatting/null/아
 Chatting/null/에
@@ -76,3 +67,82 @@ Chatting/11111/ㅋㅋㅋㅋㅋ
 Chatting/11111/ㅋㅋㅋ
 Chatting/11111/ㅋㅋㅋㅋㅋ
 Chatting/11111/ㅎㅎㅎㅎㅎ
+SecretMessage/홍길동/ㅗㅗㅗ
+MakeRoom/방1방
+EnterRoom/방1방
+Chatting/방1방/현아안녕
+Chatting/방1방/길동이 안녕 ~
+Chatting/방1방/ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+MakeRoom/aaaa
+SecretMessage/룰루룰루/gggggg
+Chatting/aaaa/gggggggggggggg
+MakeRoom/룰루가만듬
+MakeRoom/혀나방
+MakeRoom/동이동이
+MakeRoom/123123
+OutRoom/혀나방
+EnterRoom/룰루가만듬
+Chatting/룰루가만듬/ㅎㅎㅎㅎㅎ
+Chatting/혀나방/ㅎㅎㅎㅎㅎ
+Chatting/혀나방/ㅁㅁㅁㅁ
+EnterRoom/동이동이
+OutRoom/동이동이
+SecretMessage/홍길동/ggggg
+SecretMessage/abcd123/ㅁㄴㅁㄴㅁㄴ
+SecretMessage/룰루/zzzzzz
+SecretMessage/김현아/ㅁㅁㅁㅁㅁ
+SecretMessage/홍길동/ggg
+SecretMessage/홍길동/ㅎㅎㅎㅎ
+SecretMessage/abcd123/ㅁㅁㅁㅁㅁㅁ
+Chatting/123123/hhhhhhhh
+Chatting/동이동이/ㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷ
+OutRoom/룰루가만듬
+MakeRoom/방1212
+MakeRoom/방바바ㅏㅇ
+MakeRoom/방만듬
+MakeRoom/방 또만듬
+MakeRoom/zzzzzzzz
+SecretMessage/홍길동/ggg
+OutRoom/zzzzzzzz
+MakeRoom/ㅁㅁ
+MakeRoom/ㅎㅎㅎㅎㅎ
+OutRoom/ㅎㅎㅎㅎㅎ
+EnterRoom/ㅁㅁ
+OutRoom/ㅁㅁ
+Chatting/null/ㅎㅎㅎㅎ
+SecretMessage/홍길동/ㅎㅎㅎㅎㅎ
+Chatting/null/ㅎㅎㅎㅎㅎ
+EnterRoom/ㅁㅁ
+Chatting/ㅁㅁ/ㅎㅎㅎㅎㅎ
+EnterRoom/ㅁㅁ
+Chatting/ㅁㅁ/ㅗㅗㅗㅗㅗ
+Chatting/ㅁㅁ/ㅁㅁㅁㅁㅁ
+OutRoom/ㅁㅁ
+SecretMessage/나낭/ㅎㅎㅎㅎㅎ
+MakeRoom/첫번째 방 ㅋㅋ
+EnterRoom/첫번째 방 ㅋㅋ
+EnterRoom/첫번째 방 ㅋㅋ
+OutRoom/첫번째 방 ㅋㅋ
+Chatting/첫번째 방 ㅋㅋ/ㅗㅗㅗ
+Chatting/첫번째 방 ㅋㅋ/ㅇㅇㅇㅇㅇㅇ
+Chatting/첫번째 방 ㅋㅋ/ㅇㅇㅇㅇ
+Chatting/첫번째 방 ㅋㅋ/ㅇㅇㅇㅇ
+Chatting/첫번째 방 ㅋㅋ/ㅇㅇㅇㅇㅇ
+MakeRoom/qqqq
+OutRoom/qqqq
+SecretMessage/aaaa/ㅎㅎㅎㅎ
+MakeRoom/ㅎㅎㅎㅎ
+Chatting/ㅎㅎㅎㅎ/ㅎㅎㅎㅎ
+Chatting/ㅎㅎㅎㅎ/ㅋㅋㅋㅋ
+EnterRoom/ㅎㅎㅎㅎ
+EnterRoom/ㅎㅎㅎㅎ
+OutRoom/ㅎㅎㅎㅎ
+SecretMessage/홍길동/길동아
+SecretMessage/아아/왜
+MakeRoom/ㅎㅎㅎ
+OutRoom/ㅎㅎㅎ
+MakeRoom/ㅂㅂㅂㅂ
+Chatting/ㅂㅂㅂㅂ/ㅎㅎㅎ
+OutRoom/ㅂㅂㅂㅂ
+MakeRoom/ㅎㅎ
+Chatting/ㅎㅎ/ㅎㅎㅎㅎㅎ

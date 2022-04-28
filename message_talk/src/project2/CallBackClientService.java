@@ -6,5 +6,5 @@ public interface CallBackClientService {
 	void clickSendSecretMessageBtn(String msg);
 	void clickMakeRoomBtn(String roomName);
 	void clickOutRoomBtn(String roomName);
-	void clickEnterRoomBtn();
+	void clickEnterRoomBtn(String roomName);
 }
