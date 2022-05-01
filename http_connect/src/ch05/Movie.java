@@ -1,5 +1,6 @@
 package ch05;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
@@ -7,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -54,7 +56,7 @@ public class Movie {
     
     @SerializedName("genres")
     @Expose
-    private List<String> genres = null;
+    private List<String> genres = new ArrayList<String>();
     
     @SerializedName("summary")
     @Expose
@@ -111,4 +113,18 @@ public class Movie {
     @SerializedName("date_uploaded_unix")
     @Expose
     private Integer dateUploadedUnix;
+
+	@Override
+	public String toString() {
+		return "Movie [id=" + id + ", url=" + url + ", imdbCode=" + imdbCode + ", title=" + title + ", titleEnglish="
+				+ titleEnglish + ", titleLong=" + titleLong + ", slug=" + slug + ", year=" + year + ", rating=" + rating
+				+ ", runtime=" + runtime + ", genres=" + genres + ", summary=" + summary + ", descriptionFull="
+				+ descriptionFull + ", synopsis=" + synopsis + ", ytTrailerCode=" + ytTrailerCode + ", language="
+				+ language + ", mpaRating=" + mpaRating + ", backgroundImage=" + backgroundImage
+				+ ", backgroundImageOriginal=" + backgroundImageOriginal + ", smallCoverImage=" + smallCoverImage
+				+ ", mediumCoverImage=" + mediumCoverImage + ", largeCoverImage=" + largeCoverImage + ", state=" + state
+				+ ", dateUploaded=" + dateUploaded + ", dateUploadedUnix=" + dateUploadedUnix + "]\n";
+	}
+    
+    
 }
