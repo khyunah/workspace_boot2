@@ -223,6 +223,9 @@ public class Client implements CallBackClientService, ProtocolImpl {
 		} else if (protocol.equals("FailMakeRoom")) {
 			JOptionPane.showMessageDialog(null, "같은 이름의 방이 존재합니다 !", "[알림]",
 					JOptionPane.ERROR_MESSAGE, icon);
+		} else if (protocol.equals("UserOut")) {
+			userIdList.remove(from);
+			userList.setListData(userIdList);
 		}
 	}
 

@@ -1,153 +1,56 @@
-MakeRoom/방방
-EnterRoom/방방
-OutRoom/방방
-MakeRoom/ㄹㄹㄹㄹ
-EnterRoom/ㄹㄹㄹㄹ
-OutRoom/ㄹㄹㄹㄹ
-MakeRoom/아아
-EnterRoom/아아
-Chatting/아아/ㅇㅇㅇㅇ
-Chatting/아아/ㄴㄴㄴㄴ
-Chatting/아아/ㅎㅎㅎㅎ
-Chatting/아아/ㄹㄹㄹㄹ
-Chatting/아아/ㄹㅇㅇㅇ
-OutRoom/아아
-MakeRoom/ㄹㄹ
-MakeRoom/길동방
-Chatting/null/ㅎㅎㅎㅎ
-Chatting/길동방/ㅎㅎㅎㅎㅎ
-Chatting/null/ㅎㅎㅎㅎ
-Chatting/null/ㅎㅎㅎㅎ
-Chatting/null/ㅎㅎㅎㅎ
-SecretMessage/김현아/ㅎㅎㅎ
-SecretMessage/김현아/ㄹㄹㄹㄹㄹ
-SecretMessage/홍길동/홓ㅎㅎ
-MakeRoom/방방
-EnterRoom/방방
-OutRoom/방방
-MakeRoom/ㅎㅎㅎㅎ
-MakeRoom/ㅂㅂㅂ
-EnterRoom/ㅂㅂㅂ
-Chatting/ㅂㅂㅂ/ㅎㅎㅎㅎ
-EnterRoom/ㅎㅎㅎㅎ
-Chatting/ㅎㅎㅎㅎ/ㅗㅗㅗㅗ
-OutRoom/ㅂㅂㅂ
-OutRoom/ㅎㅎㅎㅎ
-OutRoom/ㅎㅎㅎㅎ
-OutRoom/방방
-SecretMessage/김현아/ㄹㄹㄹㄹ
-SecretMessage/김현아/ㅇㅇㅇㅇ
-SecretMessage/홍길동/ㅎㅎㅎㅎ
-SecretMessage/홍길동/ㅗㅗㅗ
-MakeRoom/ㄱㄱㄱㄱ
-EnterRoom/ㄱㄱㄱㄱ
-OutRoom/ㄱㄱㄱㄱ
-SecretMessage/김현아/ㅇㅇㅇ
-OutRoom/ㄱㄱㄱㄱ
-Chatting/ㄱㄱㄱㄱ/ㅇㅇㅇㅇ
-MakeRoom/ㅎㅎㅎㅎ
-OutRoom/ㅎㅎㅎㅎ
-Chatting/ㅎㅎㅎㅎ/ㅇㅇㅇㅇㅇㅇ
-Chatting/null/ㄴㄴㄴㄴㄴㄴ
-MakeRoom/길동이방
-MakeRoom/현아방
-OutRoom/길동이방
-EnterRoom/현아방
-OutRoom/현아방
-OutRoom/현아방
-MakeRoom/ㄹㄹㄹㄹㄹ
-MakeRoom/ㄴㄴㄴ
-Chatting/null/아
-Chatting/null/에
-Chatting/null/ㅎㅎㅎㅎ
-MakeRoom/11111
-EnterRoom/11111
-Chatting/11111/ㅎㅎㅎㅎ
-Chatting/11111/ㅋㅋㅋㅋㅋ
-Chatting/11111/ㅋㅋㅋ
-Chatting/11111/ㅋㅋㅋㅋㅋ
-Chatting/11111/ㅎㅎㅎㅎㅎ
-SecretMessage/홍길동/ㅗㅗㅗ
-MakeRoom/방1방
-EnterRoom/방1방
-Chatting/방1방/현아안녕
-Chatting/방1방/길동이 안녕 ~
-Chatting/방1방/ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
-MakeRoom/aaaa
-SecretMessage/룰루룰루/gggggg
-Chatting/aaaa/gggggggggggggg
-MakeRoom/룰루가만듬
-MakeRoom/혀나방
-MakeRoom/동이동이
-MakeRoom/123123
-OutRoom/혀나방
-EnterRoom/룰루가만듬
-Chatting/룰루가만듬/ㅎㅎㅎㅎㅎ
-Chatting/혀나방/ㅎㅎㅎㅎㅎ
-Chatting/혀나방/ㅁㅁㅁㅁ
-EnterRoom/동이동이
-OutRoom/동이동이
-SecretMessage/홍길동/ggggg
-SecretMessage/abcd123/ㅁㄴㅁㄴㅁㄴ
-SecretMessage/룰루/zzzzzz
-SecretMessage/김현아/ㅁㅁㅁㅁㅁ
-SecretMessage/홍길동/ggg
-SecretMessage/홍길동/ㅎㅎㅎㅎ
-SecretMessage/abcd123/ㅁㅁㅁㅁㅁㅁ
-Chatting/123123/hhhhhhhh
-Chatting/동이동이/ㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷ
-OutRoom/룰루가만듬
-MakeRoom/방1212
-MakeRoom/방바바ㅏㅇ
-MakeRoom/방만듬
-MakeRoom/방 또만듬
-MakeRoom/zzzzzzzz
-SecretMessage/홍길동/ggg
-OutRoom/zzzzzzzz
-MakeRoom/ㅁㅁ
-MakeRoom/ㅎㅎㅎㅎㅎ
-OutRoom/ㅎㅎㅎㅎㅎ
-EnterRoom/ㅁㅁ
-OutRoom/ㅁㅁ
-Chatting/null/ㅎㅎㅎㅎ
-SecretMessage/홍길동/ㅎㅎㅎㅎㅎ
-Chatting/null/ㅎㅎㅎㅎㅎ
-EnterRoom/ㅁㅁ
-Chatting/ㅁㅁ/ㅎㅎㅎㅎㅎ
-EnterRoom/ㅁㅁ
-Chatting/ㅁㅁ/ㅗㅗㅗㅗㅗ
-Chatting/ㅁㅁ/ㅁㅁㅁㅁㅁ
-OutRoom/ㅁㅁ
-SecretMessage/나낭/ㅎㅎㅎㅎㅎ
-MakeRoom/첫번째 방 ㅋㅋ
-EnterRoom/첫번째 방 ㅋㅋ
-EnterRoom/첫번째 방 ㅋㅋ
-OutRoom/첫번째 방 ㅋㅋ
-Chatting/첫번째 방 ㅋㅋ/ㅗㅗㅗ
-Chatting/첫번째 방 ㅋㅋ/ㅇㅇㅇㅇㅇㅇ
-Chatting/첫번째 방 ㅋㅋ/ㅇㅇㅇㅇ
-Chatting/첫번째 방 ㅋㅋ/ㅇㅇㅇㅇ
-Chatting/첫번째 방 ㅋㅋ/ㅇㅇㅇㅇㅇ
-MakeRoom/qqqq
-OutRoom/qqqq
-SecretMessage/aaaa/ㅎㅎㅎㅎ
-MakeRoom/ㅎㅎㅎㅎ
-Chatting/ㅎㅎㅎㅎ/ㅎㅎㅎㅎ
-Chatting/ㅎㅎㅎㅎ/ㅋㅋㅋㅋ
-EnterRoom/ㅎㅎㅎㅎ
-EnterRoom/ㅎㅎㅎㅎ
-OutRoom/ㅎㅎㅎㅎ
-SecretMessage/홍길동/길동아
-SecretMessage/아아/왜
-MakeRoom/ㅎㅎㅎ
-OutRoom/ㅎㅎㅎ
-MakeRoom/ㅂㅂㅂㅂ
-Chatting/ㅂㅂㅂㅂ/ㅎㅎㅎ
-OutRoom/ㅂㅂㅂㅂ
-MakeRoom/ㅎㅎ
-Chatting/ㅎㅎ/ㅎㅎㅎㅎㅎ
-MakeRoom/dddd
-EnterRoom/dddd
-OutRoom/dddd
-MakeRoom/sssss
-OutRoom/null
+[알림] 서버 시작
+[알림] 사용자 접속 대기
+[접속] 홍길동님
+[방 생성]홍길동_길동이네 방
+[메세지] 길동이네 방_ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[알림] 사용자 접속 대기
+[접속] 김현아님
+[입장]길동이네 방 방_김현아
+[메세지] 길동이네 방_길동이 하니
+[메세지] 길동이네 방_하이
+[메세지] 길동이네 방_ㅋㅋㅋㅋㅋㅋ
+[메세지] 길동이네 방_안뇽~~~~~
+[방 퇴장]김현아_길동이네 방
+[방 퇴장]홍길동_길동이네 방
+[방 삭제]홍길동_길동이네 방
+[에러] 유저 김현아 접속 끊김 ! !
+[에러] 유저 홍길동 접속 끊김 ! !
+[알림] 서버 시작
+[알림] 사용자 접속 대기
+[접속] 홍길동님
+[알림] 사용자 접속 대기
+[접속] 김길동님
+[방 생성]김길동_길동이 방
+[입장]길동이 방 방_홍길동
+[메세지] 길동이 방_ㅋㅋㅋㅋ
+[메세지] 길동이 방_김길동이다~~~
+[메세지] 길동이 방_안녕 길동이
+[방 퇴장]홍길동_길동이 방
+[방 퇴장]김길동_길동이 방
+[방 삭제]김길동_길동이 방
+[알림] 사용자 접속 대기
+[접속] 박길동님
+[방 생성]박길동_모여라!!
+[입장]모여라!! 방_김길동
+[입장]모여라!! 방_홍길동
+[메세지] 모여라!!_ㅋㅋㅋㅋㅋㅋㅋㅋ
+[메세지] 모여라!!_모이자
+[메세지] 모여라!!_룰루~~~~~~~~~~~~
+[에러] 유저 홍길동 접속 끊김 ! !
+[에러] 유저 박길동 접속 끊김 ! !
+[에러] 유저 김길동 접속 끊김 ! !
+[알림] 서버 시작
+[알림] 사용자 접속 대기
+[접속] 112121님
+[방 생성]112121_ggggg
+[알림] 사용자 접속 대기
+[접속] 3333님
+[입장]ggggg 방_3333
+[메세지] ggggg_ggggg
+[메세지] ggggg_zzzzzz
+[에러] 유저 3333 접속 끊김 ! !
+[알림] 사용자 접속 대기
+[접속] 555님
+[에러] 유저 555 접속 끊김 ! !
+[에러] 유저 112121 접속 끊김 ! !
+[방 삭제]112121_ggggg
