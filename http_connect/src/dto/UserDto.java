@@ -1,5 +1,8 @@
 package dto;
 
+import lombok.ToString;
+
+@ToString
 public class UserDto {
 	public int id;
 	public String name;
