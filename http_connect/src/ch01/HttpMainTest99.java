@@ -7,6 +7,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.google.gson.Gson;
+
+import dto.UserDto;
+
 public class HttpMainTest99 {
 
 	public static void main(String[] args) {
@@ -47,6 +51,22 @@ public class HttpMainTest99 {
 			// 읽어온 값의 키값에 따른 밸류값을 필요로 할때 인덱스 번호로 문자열을 잘라준다.
 			System.out.println(sb.substring(5, 7));
 			System.out.println(sb.substring(10, 11));
+			System.out.println();
+			
+			String gsonString = sb.toString();
+			
+			// 하지만 너무 불편하다 
+			// JSon을 편리하게 사용할 수 있도록 구글에서 만든 GSon 라이브러리를 사용해보자.
+			
+			Gson gson = new Gson();
+			
+			UserDto userDto = gson.fromJson(gsonString, UserDto.class);
+			
+			System.out.println(userDto.id);
+			System.out.println(userDto.name);
+			System.out.println(userDto.username);
+			System.out.println(userDto.email);
+			System.out.println(userDto.phone);
 			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
