@@ -1,33 +1,27 @@
-package ch05;
+package ch05.pojotest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
+@lombok.Data
 @ToString
 public class Data {
 
     @SerializedName("movie_count")
     @Expose
-    private Integer movieCount;
-   
+    public Integer movieCount;
     @SerializedName("limit")
     @Expose
-    private Integer limit;
-    
+    public Integer limit;
     @SerializedName("page_number")
     @Expose
-    private Integer pageNumber;
-    
+    public Integer pageNumber;
     @SerializedName("movies")
     @Expose
-    private List<Movie> movies = new ArrayList<Movie>();
+    public List<Movie> movies = null;
+
 }

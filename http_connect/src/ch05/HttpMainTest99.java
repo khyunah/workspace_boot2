@@ -12,14 +12,9 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-/**
- * https://yts.mx/api/v2/list_movies.json<br>
- * 연습 하기
- * 
- * @author ITPS
- *
- */
-public class HttpMainTest3 {
+import dto.MoviesDto;
+
+public class HttpMainTest99 {
 
 	public static void main(String[] args) {
 		try {
@@ -27,30 +22,24 @@ public class HttpMainTest3 {
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.connect();
-
+			
 			int statusCode = connection.getResponseCode();
-			System.out.println(statusCode);
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
 			StringBuffer sb = new StringBuffer();
-			String line = null;
-
-			if (statusCode == 200) {
-				while ((line = reader.readLine()) != null) {
-					sb.append(line + "\n");
+			String lineString = null;
+			
+			if ( statusCode == 200) {
+				while ((lineString = reader.readLine()) != null) {
+					sb.append(lineString);
 				}
 			}
-
-			// 사이트에 저장되어 있는 값을 그대로 출력
-			String str = sb.toString();
-			System.out.println(str);
-
-			// 자바 오브젝트로 변환
-			Yts yts = new Gson().fromJson(str, Yts.class);
-			System.out.println(yts.getData().getMovieCount());
-			System.out.println(yts);
-
+			
+			lineString = sb.toString();
+			
+			MoviesDto moviesDto = new Gson().fromJson(lineString, MoviesDto.class);
+			System.out.println(moviesDto);
+			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

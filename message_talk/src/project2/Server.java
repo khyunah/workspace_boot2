@@ -34,6 +34,9 @@ public class Server {
 	private ServerSocket serverSocket;
 	private Socket socket;
 
+	// 파일 저장을 위한 장치
+	private FileWriter fileWriter;
+
 	// 방 만들기 같은 방 이름 체크
 	private boolean roomCheck;
 
@@ -56,7 +59,7 @@ public class Server {
 		try {
 			// 서버 소켓 장치
 			serverSocket = new ServerSocket(10000);
-			mainBoard.append("[알림] 서버 시작\n");
+			serverViewAppendWriter("[알림] 서버 시작\n");
 			serverFrame.getConnectBtn().setEnabled(false);
 			connectClient();
 
@@ -79,15 +82,15 @@ public class Server {
 
 						// 소켓 장치
 						socket = serverSocket.accept();
-						mainBoard.append("[알림] 사용자 접속 대기\n");
+						serverViewAppendWriter("[알림] 사용자 접속 대기\n");
 
 						// 연결을 대기 하다가 유저가 들어오면 유저 생성, 소켓으로 유저 구분 가능.
 						ConnectedUser user = new ConnectedUser(socket);
 						user.start();
 					} catch (IOException e) {
 						// 서버 중지
-						mainBoard.append("[에러] 서버 중지 ! !\n");
-						break;
+						serverViewAppendWriter("[에러] 접속 에러 ! !\n");
+						
 					}
 				}
 			}
@@ -105,6 +108,25 @@ public class Server {
 			user.writer(msg);
 		}
 	}
+	
+
+	/**
+	 * 서버로 들어오는 요청은 모두 저장되는 파일 Writer.<br>
+	 * 
+	 * @param str
+	 */
+	private void serverViewAppendWriter(String str) {
+		try {
+			fileWriter = new FileWriter("kha_talk_log.txt", true);
+			mainBoard.append(str);
+			fileWriter.write(str);
+			fileWriter.flush();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * 소켓이 연결이 되면 ConnectedUser클래스가 생성이 된다.
@@ -120,9 +142,6 @@ public class Server {
 		private BufferedReader reader;
 		private BufferedWriter writer;
 
-		// 파일 저장을 위한 장치
-		private FileWriter fileWriter;
-
 		// 유저 정보
 		private String id;
 		private String myRoomName;
@@ -130,24 +149,6 @@ public class Server {
 		public ConnectedUser(Socket socket) {
 			this.socket = socket;
 			connectIO();
-		}
-
-		/**
-		 * 서버로 들어오는 요청은 모두 저장되는 파일 Writer.<br>
-		 * 
-		 * @param str
-		 */
-		private void fileWriter(String str) {
-			try {
-				fileWriter = new FileWriter("kha_talk_log.txt", true);
-
-				fileWriter.write(str + "\n");
-				fileWriter.flush();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 
 		/**
@@ -162,7 +163,7 @@ public class Server {
 				sendInfomation();
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "서버 입출력 장치 에러!", "알림", JOptionPane.ERROR_MESSAGE, icon);
-				serverFrame.getMainBoard().append("[에러] 서버 입출력 장치 에러 ! !\n");
+				serverViewAppendWriter("[에러] 서버 입출력 장치 에러 ! !\n");
 			}
 		}
 
@@ -174,7 +175,7 @@ public class Server {
 			try {
 				// 유저의 아이디를 가지고 온다.
 				id = reader.readLine();
-				mainBoard.append("[접속] " + id + "님\n");
+				serverViewAppendWriter("[접속] " + id + "님\n");
 
 				// 접속된 유저들에게 유저 명단 업데이트를 위한 출력
 				newUser();
@@ -187,7 +188,7 @@ public class Server {
 
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "접속 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
-				serverFrame.getMainBoard().append("[에러] 접속 에러 ! !\n");
+				serverViewAppendWriter("[에러] 접속 에러 ! !\n");
 			}
 		}
 
@@ -197,11 +198,18 @@ public class Server {
 				while (true) {
 					String str = reader.readLine();
 					checkProtocol(str);
-					fileWriter(str);
 				}
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "서버 입력 장치 에러 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
-				serverFrame.getMainBoard().append("[에러] 서버 입력 장치 에러 ! !\n");
+				JOptionPane.showMessageDialog(null, "유저 접속 끊김 !", "알림", JOptionPane.ERROR_MESSAGE, icon);
+				serverViewAppendWriter("[에러] 유저 " + id +" 접속 끊김 ! !\n");
+				for (int i = 0; i < madeRooms.size(); i++) {
+					MyRoom myRoom = madeRooms.elementAt(i);
+					if(myRoom.roomName.equals(this.myRoomName)) {
+						myRoom.removeRoom(this);
+					}
+				}
+				connectedUsers.remove(this);
+				broadCast("UserOut/" + id);
 			}
 		}
 
@@ -254,7 +262,7 @@ public class Server {
 		 */
 		@Override
 		public void chatting() {
-			mainBoard.append("[메세지] " + from + "_" + message + "\n");
+			serverViewAppendWriter("[메세지] " + from + "_" + message + "\n");
 
 			for (int i = 0; i < madeRooms.size(); i++) {
 				MyRoom myRoom = madeRooms.elementAt(i);
@@ -267,7 +275,7 @@ public class Server {
 
 		@Override
 		public void secretMessage() {
-			mainBoard.append("[비밀 메세지] " + id + "ㅡ>" + from + "_" + message + "\n");
+			serverViewAppendWriter("[비밀 메세지] " + id + "ㅡ>" + from + "_" + message + "\n");
 
 			for (int i = 0; i < connectedUsers.size(); i++) {
 				ConnectedUser user = connectedUsers.elementAt(i);
@@ -285,7 +293,7 @@ public class Server {
 
 				if (room.roomName.equals(from)) {
 					writer("FailMakeRoom/" + from);
-					mainBoard.append("[방 생성 실패]" + id + "_" + from + "\n");
+					serverViewAppendWriter("[방 생성 실패]" + id + "_" + from + "\n");
 					roomCheck = false;
 				} else {
 					roomCheck = true;
@@ -296,7 +304,7 @@ public class Server {
 				myRoomName = from;
 				MyRoom myRoom = new MyRoom(from, this);
 				madeRooms.add(myRoom);
-				mainBoard.append("[방 생성]" + id + "_" + from + "\n");
+				serverViewAppendWriter("[방 생성]" + id + "_" + from + "\n");
 
 				newRoom();
 				writer("MakeRoom/" + from);
@@ -316,7 +324,7 @@ public class Server {
 				if (myRoom.roomName.equals(from)) {
 					myRoomName = null;
 					myRoom.roomBroadCast("Chatting/퇴장/" + id + "님 퇴장");
-					mainBoard.append("[방 퇴장]" + id + "_" + from + "\n");
+					serverViewAppendWriter("[방 퇴장]" + id + "_" + from + "\n");
 					myRoom.removeRoom(this);
 					writer("OutRoom/" + from);
 				}
@@ -332,7 +340,7 @@ public class Server {
 					myRoomName = from;
 					myRoom.addUser(this);
 					myRoom.roomBroadCast("Chatting/입장/" + id + "님 입장");
-					serverFrame.getMainBoard().append("[입장]" + from + " 방_" + id + "\n");
+					serverViewAppendWriter("[입장]" + from + " 방_" + id + "\n");
 					writer("EnterRoom/" + from);
 				}
 			}
@@ -404,7 +412,7 @@ public class Server {
 
 					if (myRoom.roomName.equals(roomName)) {
 						madeRooms.remove(this);
-						mainBoard.append("[방 삭제]" + user.id + "_" + from + "\n");
+						serverViewAppendWriter("[방 삭제]" + user.id + "_" + from + "\n");
 						roomBroadCast("OutRoom/" + from);
 						broadCast("EmptyRoom/" + from);
 						break;
