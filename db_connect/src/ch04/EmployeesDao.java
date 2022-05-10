@@ -25,8 +25,13 @@ public class EmployeesDao implements IEmployeesDao {
 	// 직급별 직원 조회하기
 	@Override
 	public ArrayList<EmployeesDto> selectTitle(String title) {
-		String selectTitleQuery = "select *\r\n" + "from employees as e\r\n" + "inner join titles as t\r\n"
-				+ "on e.emp_no = t.emp_no\r\n" + "where t.title = ? and t.to_date = '9999-01-01'";
+		String selectTitleQuery = 
+				"SELECT *"
+				+ "FROM employees AS e"
+				+ "INNER JOIN titles AS t"
+				+ "ON e.emp_no = t.emp_no"
+				+ "WHERE t.title = ? "
+				+ "AND t.to_date = '9999-01-01'";
 		ArrayList<EmployeesDto> result = new ArrayList<>();
 		try {
 			preparedStatement = connection.prepareStatement(selectTitleQuery);
@@ -48,15 +53,16 @@ public class EmployeesDao implements IEmployeesDao {
 	// 사원번호로 이름, 직급, 연봉 조회하기 
 	@Override
 	public ArrayList<EmployeesDto> selectSalary(String emp_no) {
-		String selectSalaryQuery = "select e.first_name, e.last_name, t.title, s.salary\r\n"
-				+ "from employees as e\r\n"
-				+ "inner join salaries as s\r\n"
-				+ "on e.emp_no = s.emp_no\r\n"
-				+ "inner join titles as t\r\n"
-				+ "on e.emp_no = t.emp_no\r\n"
-				+ "where e.emp_no = ? \r\n"
-				+ "and s.to_date = '9999-01-01'\r\n"
-				+ "group by s.emp_no";
+		String selectSalaryQuery = 
+				"SELECT e.first_name, e.last_name, t.title, s.salary"
+				+ "FROM employees AS e"
+				+ "INNER JOIN salaries AS s"
+				+ "ON e.emp_no = s.emp_no"
+				+ "INNER JOIN titles AS t"
+				+ "ON e.emp_no = t.emp_no"
+				+ "WHERE e.emp_no = ? "
+				+ "AND s.to_date = '9999-01-01'"
+				+ "GROUP BY s.emp_no";
 		ArrayList<EmployeesDto> result = new ArrayList<>();
 		try {
 			preparedStatement = connection.prepareStatement(selectSalaryQuery);
@@ -80,11 +86,12 @@ public class EmployeesDao implements IEmployeesDao {
 	// 부서별 직원 조회하기
 	@Override
 	public ArrayList<EmployeesDto> selectDept(String dept_no) {
-		String selectDeptQuery = "select *\r\n"
-				+ "from employees as e\r\n"
-				+ "inner join dept_emp as d\r\n"
-				+ "on e.emp_no = d.emp_no\r\n"
-				+ "where d.dept_no = ? ";
+		String selectDeptQuery = 
+				"SELECT *"
+				+ "FROM employees AS e"
+				+ "INNER JOIN dept_emp AS d"
+				+ "ON e.emp_no = d.emp_no"
+				+ "WHERE d.dept_no = ? ";
 		ArrayList<EmployeesDto> result = new ArrayList<>();
 		try {
 			preparedStatement = connection.prepareStatement(selectDeptQuery);
@@ -107,11 +114,12 @@ public class EmployeesDao implements IEmployeesDao {
 	// 입력한 입사날짜 이후의 입사 직원 조회하기 
 	@Override
 	public ArrayList<EmployeesDto> selectFromDate(String from_date) {
-		String selectFromDateQuery = "select *\r\n"
-				+ "from employees as e\r\n"
-				+ "inner join dept_emp as d\r\n"
-				+ "on e.emp_no = d.emp_no\r\n"
-				+ "where d.from_date > ? ";
+		String selectFromDateQuery = 
+				"SELECT *"
+				+ "FROM employees AS e"
+				+ "INNER JOIN dept_emp AS d"
+				+ "ON e.emp_no = d.emp_no"
+				+ "WHERE d.from_date > ? ";
 		ArrayList<EmployeesDto> result = new ArrayList<>();
 		try {
 			preparedStatement = connection.prepareStatement(selectFromDateQuery);
@@ -134,12 +142,13 @@ public class EmployeesDao implements IEmployeesDao {
 	// 부서별 현재 매니저 정보 조회하기
 	@Override
 	public ArrayList<EmployeesDto> selectManagerInfo(String dept_no) {
-		String selectManagerInfoQuery = "select *\r\n"
-				+ "from employees as e\r\n"
-				+ "inner join dept_manager as d\r\n"
-				+ "on e.emp_no = d.emp_no\r\n"
-				+ "where d.dept_no = ? \r\n"
-				+ "and d.to_date = '9999-01-01'";
+		String selectManagerInfoQuery = 
+				"SELECT *"
+				+ "FROM employees AS e"
+				+ "INNER JOIN dept_manager AS d"
+				+ "ON e.emp_no = d.emp_no"
+				+ "WHERE d.dept_no = ? "
+				+ "AND d.to_date = '9999-01-01'";
 		ArrayList<EmployeesDto> result = new ArrayList<>();
 		try {
 			preparedStatement = connection.prepareStatement(selectManagerInfoQuery);
