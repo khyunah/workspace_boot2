@@ -12,7 +12,7 @@ public interface IEmployeesDao {
 	// 부서별 직원 조회 하기
 	ArrayList<EmployeesDto> selectDept(String dept_no);
 	
-	// 입력한 입사날짜 이후의 입사 직원 조회하기
+	// 입력한 입사날짜부터 입사 직원 조회하기 
 	ArrayList<EmployeesDto> selectFromDate(String from_date);
 	
 	// 부서별 현재 매니저 정보 조회하기
